@@ -1,25 +1,35 @@
 ---
 layout: about
-title: about
+title: About
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: Georgia Institute of Technology -- MS Computer Engineering
 
 profile:
-  align: right
+  align: left
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+    <p>266 Ferst drive, Atlanta, Georgia 30309, USA</p>
 
 news: true # includes a list of news items
-selected_papers: true # includes a list of papers marked as "selected={true}"
+selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+<div style="text-align: justify;">
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+Hi👋! I am Karthikeya Sharma, a graduate student pursuing MS in the department of Electrical and Computer Engineering by research under the supervision of <strong><a href = "https://sites.gatech.edu/ece-callie/"> Prof. Callie Hao </a></strong> at Georgia Tech's <strong><a href = "https://sharclab.ece.gatech.edu"> SHARC Lab</a></strong>. My research interests primarily encompass <strong>Hardware-Software Co-design, Reconfigurable computing and Electronic Design Automation (EDA)</strong>. This website serves as a platform to showcase my skills, research projects, side quests, publications, and a glimpse of my personal life! <br/><br/>
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+Generative AI's computational demands are pushing the boundaries of traditional scaling paradigms. Innovations in distributed computing not only meet high-performance demands but also introduce challenges in scalability, communication overhead, and energy efficiency. Thus, I aim to address these challenges arising from this paradigm shift to enable <strong>rapid prototyping</strong>, <strong>workload simulation</strong>, and <strong>performance evaluation</strong> of next-generation architectures focusing on the following research directions: <br/>
+</div>
+
+<div style="margin-left: 260px;">
+<ul>
+  <li><u><strong>Co-design for large-scale hardware acceleration:</strong></u> How can we co-design efficient dataflow architectures with hardware-aware algorithms accounting for scalability?</li>
+  <li><u><strong>Cutting-edge tools for Hardware-Software Co-design:</strong></u> How can we make better tools that push the boundaries of developing novel architectures that meet the demands of modern computing?</li>
+</ul>
+</div>
+
+<div style="margin-left: 290px;">
+In addition to my academic pursuits, I enjoy playing games, watching Formula-1, exploring history, and being an avid aviation enthusiast. <br/>
+</div>

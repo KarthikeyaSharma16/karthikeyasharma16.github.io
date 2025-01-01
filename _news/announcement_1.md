@@ -1,8 +1,8 @@
 ---
 layout: post
-date: 2015-10-22 15:59:00-0400
+date: 2023-08-21 08:59:00-0500
 inline: true
 related_posts: false
 ---
 
-A simple inline announcement.
+Super Excited to start my Master's degree at <strong><a href="https://ece.gatech.edu">Georgia Tech</a></strong>!
