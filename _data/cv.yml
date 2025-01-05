@@ -7,27 +7,34 @@
       value: English (fluent), Hindi (fluent), Tamil (native), Telugu (fluent)
     - name: Email
       value: karthikeyasharma@hotmail.com
-    - name: Social Profiles
+    - name: Socials
       value: <strong> <a href="https://www.linkedin.com/in/karthikeyasharma16/">LinkedIn</a></strong>  <strong><a href="https://github.com/KarthikeyaSharma16">Github</a></strong>  <strong><a href="https://scholar.google.com/citations?user=O4Tya_YAAAAJ&hl=en">Google Scholar</a></strong>
+    - name: Short Description
+      value: I am a graduate student pursuing MS ECE at Georgia Tech. My research interests broadly include Computer Architecture, Domain Specific Accelerators like FPGA and ASICs, and Memory systems. Currently, I am exploring the hardware-software co-design space and optimizing algorithms for efficient hardware implementations.
 
-- title: Academic Interests
+- title: Research Interests
   type: nested_list
   contents:
-    - title: Topic 1.
+    - title: <strong> Hardware-Software Co-design </strong> 
       items:
-        - Description 1.
-        - Description 2.
-    - title: Topic 2.
+        - Sparse and Dense Dataflow Accelerators - Algorithm to Hardware design.
+        - Programming model (Workload mapping)
+        - Interconnection Network Optimization and Peformance for distributed training and inference.
+    - title: <strong> Reconfigurable Architectures </strong>
       items:
-        - Description 1.
-        - Description 2.
+        - FPGA - Routing, Placement, and Timing optimization.
+        - CGRA - reconfigurable interconnects, dynamic partial reconfiguration.
+    - title: <strong> Electronic Design Automation (EDA) </strong>
+      items:
+        - Design Space Exploration and Analytical model for QoR estimation.
+        - Framework for simulation, benchmarking and validation of automatically generated hardware accelerator designs.
 
 - title: Education
   type: time_table
   contents:
     - title: MS in Electrical and Computer Engineering
       institution: Georgia Institute of Technology, Atlanta, Georgia, USA
-      year: August'23 - May'25
+      year: Aug'23 - May'25
       description:
         - title: Coursework
           contents:
@@ -110,21 +117,21 @@
   contents:
     - title: Special Problems Student
       institution: Cicerone Lab@Georgia Tech
-      year: August'24 - December'24
+      year: Aug'24 - December'24
       description:
         - Accelerated signal-processing pipeline for Hyperspectral Raman Imaging by optimizing and porting the implementation to GPU.
         - Resolved key bottlenecks in the pipeline to achieve significant speedup through batch processing of SVD.
         - Implemented automated metrics for SVD vector selection, organized post-processing analysis toolkit, and explored UNET phase error correction.
     - title: Research Collaborator
       institution: Synergy Lab@Georgia Tech
-      year: April'24 - Present
+      year: Apr'24 - Present
       description:
         - Created APEX, an automated tool-chain for unifying open-source distributed ML frameworks to study the impact of network configurations on collective algorithms through Design Space Exploration.
         - Translated auto-generated collective algorithm synthesizer outputs (TACOS) into MSCCLang IR, represented collectives as standardized Chakra Execution Traces (ETs), and bypassed the system layer of ASTRA-Sim, reducing engineering effort to create the IR for studying the impact of network parameters on collective algorithms in a distributed setup of GPUs.
         - Developed a configuration file to support the translation of heterogeneous topologies to study the impact of collectives on workloads and an interactive visualizer illustrating collective flows over GPU networks using Chakra ETs for agnostic collective patterns and network configurations.
     - title: M.S. Thesis Student
       institution: SHARC Lab@Georgia Tech
-      year: January'24 - Present
+      year: Jan'24 - Present
       description:
         - Contributed to building a fully automated and validated framework for generating correct-by-design FPGA accelerators from verified straight-line C implementations of cryptographic primitives.
         - Worked on implementing hardware-specific optimizations using HLS, including loop transformations and memory reorganization with equivalence-preserving loop transformations for enhanced hardware synthesis.
@@ -133,13 +140,13 @@
         - Achieved scalable designs with up to 88.88% reduced resource usage and a 54.31% improvement in latency compared to naively synthesized straight-line C cryptographic primitives.
     - title: Student Assistant
       institution: iSenSys Lab@Georgia Tech
-      year: January'24 - Present
+      year: Jan'24 - Present
       description:
         - Implemented a real-time frequency data acquisition system using Microsemi SmartFusion2 SoC to control a closed-loop system in a battery-powered embedded chemical sensing device to detect volatile organic compounds with sub-parts-per-million (ppm) sensitivity.
         - Interfaced ARM Cortex M3 MCU with SPI-controlled FPGA implementing reciprocal frequency counter to convert signal from the hammerhead resonator into frequency data enabling timed data collection and power-down phases reducing power consumption by 42%.
     - title: Undergraduate Research Associate
       institution: SRM Institute of Science and Technology
-      year: January'22 - May'23
+      year: Jan'22 - May'23
       description:
         - title: Project - Edge Processing for 3D object reconstruction
           contents:
@@ -153,12 +160,25 @@
 - title: Projects
   type: time_table
   contents:
+    - title: <a href="https://github.com/KarthikeyaSharma16/context-aware-deepfake-detection">Context-Aware Deepfake detection</a>
+      year: Feb'24 - May'24
+      description:
+        - Created custom dataset from YouTube and Reddit including metadata such as video description and comment section to provide contextual information for deepfake detection.
+        - Processed training data into a pre-processing pipeline to clean the metadata, removing unwanted text patterns, translating languages, and applying lemmatization for easier tokenization and feature extraction.
+        - Applied unsupervised algorithms such as Bertopic, GMM and K-Means clustering to classify contextual deepfake data.
+        - Implemented Hierarchical Multi-modal Contextual Attention Network model, achieving a training accuracy of 91.7%.
     - title: <a href="https://github.com/KarthikeyaSharma16/FaultForge-Sim">Fault-Forge Sim</a>
-      year: August'23 - December'23
+      year: Aug'23 - Dec'23
       description:
         - Developed a C++ based logic simulator for parsing netlist files, enabling fault-free output evaluation.
         - Applied PODEM test generation to produce input vectors for analyzing combinational circuits and verified their correctness using deductive fault simulation.
-        - Achieved 99.71% fault coverage on average for all the netlists used in testing
+        - Achieved 99.71% fault coverage on average for all the netlists used in testing.
+    - title: CMP Memory Simulator
+      year: Nov'23 - Dec'23
+      description:
+        - Engineered a dual-core simulator with a multi-level memory hierarchy encompassing L1, L2 cache, and DRAM, implementing LRU and random eviction policies.
+        - Optimized L2 shared cache utilization through Static Way Partitioning (SWP) and Dynamic Way Partitioning (DWP).
+        - Achieved 0.85% performance enhancement in the optimized implementation of DWP.
 
 - title: Honors and Awards
   type: time_table
@@ -174,6 +194,18 @@
     - year: 2020
       items:
         - Performance Based Scholarship for the academic year 2019-20.
+
+- title: Teaching
+  type: time_table
+  contents:
+    - year: August'24 - December'24
+      title: Graduate Teaching Assistant
+      items:
+        - GTA for the course CS6340 - Software Analysis and Test.
+        - Conducted weekly office hours, graded assignments, and provided feedback to students.
+        - Assisted in the development of course materials and conducted review sessions for exams.
+        - Collaborated with the professor to create and grade assignments and exams.
+        - Assisted in the development of course materials and conducted review sessions for exams.
 
 - title: Volunteering
   type: time_table
