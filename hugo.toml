@@ -1,0 +1,95 @@
+baseURL = "https://karthikeyasharma16.github.io/"
+locale = "en-us"
+title = "Karthikeya Sharma"
+theme = "PaperMod"
+
+enableRobotsTXT = true
+enableEmoji = true
+summaryLength = 30
+pagination.pagerSize = 10
+
+[markup.goldmark.renderer]
+  # Your migrated pages contain raw HTML (tables, figures, styled divs).
+  unsafe = true
+
+[markup.highlight]
+  style = "github-dark"
+  noClasses = false
+
+[params]
+  description = "MS ECE @ Georgia Tech — hardware-software co-design, reconfigurable computing, and EDA."
+  author = "Karthikeya Sharma"
+  defaultTheme = "auto"
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowBreadCrumbs = true
+  ShowPostNavLinks = true
+  ShowCodeCopyButtons = true
+  ShowToc = true
+  TocOpen = false
+  hideFooter = false
+
+  [params.profileMode]
+    enabled = true
+    title = "Karthikeya Sharma"
+    subtitle = "MS Computer Engineering, Georgia Institute of Technology<br/>Hardware-Software Co-design · Reconfigurable Computing · EDA"
+    imageUrl = "/img/prof_pic.jpg"
+    imageTitle = "Karthikeya Sharma"
+    imageWidth = 160
+    imageHeight = 160
+
+    [[params.profileMode.buttons]]
+      name = "Projects"
+      url = "projects"
+    [[params.profileMode.buttons]]
+      name = "CV"
+      url = "cv"
+    [[params.profileMode.buttons]]
+      name = "Publications"
+      url = "publications"
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/KarthikeyaSharma16"
+  [[params.socialIcons]]
+    name = "linkedin"
+    url = "https://www.linkedin.com/in/karthikeyasharma16/"
+  [[params.socialIcons]]
+    name = "googlescholar"
+    url = "https://scholar.google.com/citations?user=O4Tya_YAAAAJ&hl=en"
+  [[params.socialIcons]]
+    name = "instagram"
+    url = "https://instagram.com/sharma.karthikeya"
+  [[params.socialIcons]]
+    name = "email"
+    url = "mailto:karthikeyasharma@hotmail.com"
+  [[params.socialIcons]]
+    name = "cv"
+    url = "/pdf/Resume_hotmail.pdf"
+
+# Nav entries. `make new-section name=<x>` appends here automatically.
+[[menu.main]]
+  identifier = "about"
+  name = "About"
+  url = "/about/"
+  weight = 10
+[[menu.main]]
+  identifier = "projects"
+  name = "Projects"
+  url = "/projects/"
+  weight = 20
+[[menu.main]]
+  identifier = "publications"
+  name = "Publications"
+  url = "/publications/"
+  weight = 30
+[[menu.main]]
+  identifier = "cv"
+  name = "CV"
+  url = "/cv/"
+  weight = 40
+[[menu.main]]
+  identifier = "blog"
+  name = "Blog"
+  url = "/blog/"
+  weight = 60

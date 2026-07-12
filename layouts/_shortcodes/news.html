@@ -1,0 +1,22 @@
+{{- /* limit="0" (the default) shows every item. */ -}}
+{{- $limit := int (.Get "limit" | default 0) -}}
+{{- $items := (where site.RegularPages "Section" "news").ByDate.Reverse -}}
+{{- if gt $limit 0 }}{{ $items = first $limit $items }}{{ end -}}
+<ul class="news-list">
+  {{- range $items }}
+  <li>
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2006" }}</time>
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+  </li>
+  {{- end }}
+</ul>
+
+<style>
+  .news-list { list-style: none; margin: 0 0 .5rem; padding: 0; }
+  .news-list li { display: flex; gap: 1rem; padding: .4rem 0; border-bottom: 1px solid var(--border); }
+  .news-list time { flex: 0 0 5.5rem; color: var(--secondary); font-variant-numeric: tabular-nums; }
+  .news-more { font-size: .9em; }
+  @media (max-width: 480px) {
+    .news-list li { flex-direction: column; gap: .15rem; }
+  }
+</style>
