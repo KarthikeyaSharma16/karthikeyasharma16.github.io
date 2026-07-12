@@ -1,0 +1,30 @@
+{{- define "main" }}
+
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}<div class="post-description">{{ . | markdownify }}</div>{{ end }}
+</header>
+
+{{- $pages := .RegularPages.ByWeight }}
+
+<ul class="project-grid">
+  {{- range $pages }}
+  <li class="project-card">
+    <a href="{{ .RelPermalink }}" aria-label="{{ .Title }}">
+      <div class="project-thumb">
+        {{- with .Params.cover.image }}
+        <img src="{{ . }}" alt="{{ $.Params.cover.alt | default $.Title }}" loading="lazy">
+        {{- else }}
+        <div class="project-thumb-empty" aria-hidden="true">{{ substr .Title 0 1 }}</div>
+        {{- end }}
+      </div>
+      <div class="project-body">
+        <h2>{{ .Title }}</h2>
+        {{- with .Description }}<p>{{ . }}</p>{{ end }}
+      </div>
+    </a>
+  </li>
+  {{- end }}
+</ul>
+
+{{- end }}

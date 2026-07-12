@@ -50,6 +50,61 @@ code, kbd, pre, .highlight pre code {
 .post-content table th,
 .post-content table td { padding: 0.55em 0.9em; }
 
+/* --- Projects grid ---------------------------------------------------------
+   Up to 5 per row on wide screens, stepping down as the viewport narrows.
+   The section is wider than the default prose column so 5 cards fit legibly. */
+
+/* PaperMod's column is ~720px; 5 cards need room. Widen only this page. */
+.main:has(.project-grid) { max-width: 1340px; }
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.25rem;
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+}
+
+.project-card {
+  background: var(--entry);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.project-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgb(0 0 0 / 12%); }
+.project-card a { display: flex; flex-direction: column; height: 100%; color: inherit; }
+.project-card a:hover { color: inherit; }
+
+.project-thumb { aspect-ratio: 4 / 3; background: var(--tertiary); }
+.project-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.project-thumb-empty {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--sans); font-size: 2rem; font-weight: 600;
+  color: var(--secondary);
+}
+
+.project-body { padding: .8rem .9rem 1rem; }
+.project-body h2 {
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.3;
+  margin: 0 0 .35rem;
+}
+.project-body p {
+  font-family: var(--serif);
+  font-size: .875rem;
+  line-height: 1.45;
+  color: var(--secondary);
+  margin: 0;
+}
+
+@media (max-width: 1400px) { .project-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 1100px) { .project-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 800px)  { .project-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px)  { .project-grid { grid-template-columns: 1fr; } }
+
 /* Blockquotes: quieter, less shouty than the default. */
 .post-content blockquote {
   font-family: var(--serif);
