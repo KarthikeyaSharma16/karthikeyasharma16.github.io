@@ -1,0 +1,336 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+% Adjust margins (Reduced for more content)
+\addtolength{\oddsidemargin}{-0.85in}   % Shift text left (reduce left margin)
+\addtolength{\evensidemargin}{-0.75in}  % Shift text left (reduce right margin)
+\addtolength{\textwidth}{1.4in}         % Increase text width
+\addtolength{\topmargin}{-0.9in}       % Reduce top margin
+\addtolength{\textheight}{1.75in}       % Increase text height (reduce bottom margin)
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\classesList}[4]{
+    \item\small{
+        {#1 #2 #3 #4 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\LARGE\scshape Karthikeya Sharma M} \\ \vspace{1pt}
+    \small \href{sharmakarthikeya6@gmail.com}{\raisebox{-0.2\height}\faEnvelope\  \underline{sharmakarthikeya6@gmail.com}} ~
+    \href{https://www.linkedin.com/in/karthikeyasharma16/}{\raisebox{-0.2\height}\faLinkedin\ \underline{linkedin.com/in/karthikeyasharma16}}  ~
+    \href{https://github.com/KarthikeyaSharma16}{\raisebox{-0.2\height}\faGithub\ \underline{KarthikeyaSharma16}}
+    \vspace{-8pt}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Georgia Institute of Technology}{08/2023 -- 05/2025}
+      {Master of Science in Electrical and Computer Engineering}{GPA: 3.77/4}
+      \vspace{-5pt}
+      \resumeSubheading
+      {SRM Institute of Science and Technology}{07/2019 -- 05/2023}
+      {Bachelor of Technology in Electronics and Communication Engineering}{GPA: 9.83/10}
+  \resumeSubHeadingListEnd
+\vspace{-14pt}
+
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.0in, label={}]
+    \small{\item{
+     \textbf{Coding}{: C/C++, CUDA C, Scripting (Python, Bash, TCL), RTL (Verilog, SystemVerilog), High-Level Synthesis} \\
+     \textbf{Libraries}{: OpenGL, OpenMP, OpenMPI, SFML, PyTorch} \\
+     \textbf{Open-source Simulators}{: ScaleHLS, ScaleSim, TACOS, Chakra, ASTRA-Sim} \\
+     \textbf{Tools}{: Vivado, Vitis \& Catapult HLS, Modelsim, Verdi, Icarus Verilog, Libero 12.5, Softconsole, Code Composer Studio} \\
+     \textbf{Protocols}{: I2C, SPI, CAN, UART, AXI (AXI-MM, AXIS, AXI-Lite), QDMA, PCIe} \\
+     \textbf{Hardware}{: Alveo U45N \& U55C, Versal, Microsemi SmartFusion2, Pynq-Z2, Raspberry Pi, ARM Mbed, Arduino Uno} \\
+     \textbf{Coursework}{: Advanced Computer Architecture, Hardware-Software Co-Design for ML Systems, Parallel Programming for FPGA, Advanced Programming Techniques, Machine Learning, Digital Systems Testing, Computer Network Security, Computer Communication Networks, ARM Based Embedded System Design, Digital Logic \& VLSI Design.} \\
+     % \textbf{Technical Concepts}{: RTL design, Verification (w/ UVM basics), CPU micro-architecture, Interconnection networks, Cache Coherency, AI Accelerators, ASIC \& FPGA design flow, System Optimizations for distributed ML, DFT (Scan Chains, LFSRs, Fault Simulation \& ATPG algorithms).} \\
+     }}
+ \end{itemize}
+\vspace{-14pt}
+
+%-----------EXPERIENCE-----------
+\section{Work Experience}
+  \resumeSubHeadingListStart
+  \small
+
+    \resumeSubheading
+      {Hardware Engineer}{07/2025 -- Present}
+      {\textbf{MangoBoost, Inc.}}{Bellevue, WA}
+      \resumeSubSubheading
+        {\textbf{System Architecture \& Implementation Team} $|$ Hardware Development Group }{07/2025 -- 12/2025}
+      \resumeItemListStart
+            \resumeItem{Core architect of Data Plane Studio (DPS) for Mango BoostX 400G DPU, enabled scalable reuse of the hardware architecture across multiple use cases (ROCEv2 AI / NVMe-over-RDMA / NTI) etc.}
+            \resumeItem{Owned PCIe and DMA-centric feature development; designed reset-tree architecture and resolved critical hardware functional issues.}
+            \resumeItem{Developed automation scripts to streamline system testing, enhanced CI/CD workflows, prepared package to be delivered for end customers and led comprehensive documentation efforts to support scalable DPU evolution.}
+            \resumeItem{Prepared p}
+      \resumeItemListEnd
+      \vspace{-3pt}
+      \resumeSubSubheading
+        {\textbf{GPU Server Taskforce} $|$ Workload Analysis \& Performance Optimization}{01/2026 -- Present}
+      \resumeItemListStart
+            \resumeItem{Application Benchmarking --> AI agents (flow of agents, bottleneck analysis), Strix Halo, Guardrails + System optimization}
+            \resumeItem{AI Productization Pipeline + Agent Sandbox}
+            \resumeItem{}
+            \resumeItem{Identified and characterized application-level GPU server workloads, benchmarking end-to-end performance to expose bottlenecks and guide optimization targets across the software–hardware stack.}
+      \resumeItemListEnd
+    \normalsize
+  \resumeSubHeadingListEnd
+\vspace{-15pt}
+
+\section{Projects}
+  \resumeSubHeadingListStart
+  \small
+      \resumeProjectHeading {\textbf{APEX: Collective-Communication} $|$ \textit{\textbf{Python}}}{04/2024 -- 12/2024}
+      \resumeItemListStart
+            \resumeItem{Prototyped \textbf{APEX}, an automated tool-chain for analyzing network configurations and collective algorithms for ML algorithms via Design Space Exploration (DSE), revealing 64\% of the workload bandwidth and topology dependent.}
+            \resumeItem{Streamlined collective algorithm synthesis by translating TACOS outputs to MSCCLang IR and Chakra Execution Traces, bypassing ASTRA-Sim's system layer reducing engineering effort by 10$\times$.}
+            \resumeItem{Created a configuration file for heterogeneous topology translation and an interactive visualizer for analysis of GPU network collective flows and patterns for congestion and switch modeling.}
+      \resumeItemListEnd
+      
+      \resumeProjectHeading {\textbf{Cryptonite: Scalable DSE for Cryptographic Workloads} $|$ \textit{\textbf{Python}}}{01/2024 -- 05/2025}
+      \resumeItemListStart
+            \resumeItem{Developed Cryptonite, a tool-chain for generating \textbf{hundreds of correct-by-design} HLS designs for FPGA-based accelerators from verified straight-line C implementations of cryptographic primitives.}
+            \resumeSubItem{Built a DSE engine and QoR estimator for performance analysis, enabling scalable designs with up to 88.88\% resource utilization reduction and 54.31\% latency improvement.}
+      \resumeItemListEnd
+
+      \resumeProjectHeading {\textbf{Federated training and profiling of large-scale ML model} $|$ \textit{\textbf{Python}}}{03/2024 - 04/2024}
+        \resumeItemListStart
+            \resumeItem{Implemented single and distributed GPU training (2 GPUs) of a GPT-like model on an NVIDIA RTX 6000 cluster using Megatron-LM, utilizing tensor, data, and pipeline parallelism.} 
+            \resumeItem{Profiled training with TensorBoard showing tensor parallelism achieving 1.84× speedup over pipeline parallelism.}
+        \resumeItemListEnd
+        \vspace{-15pt}
+        
+        \resumeProjectHeading {\textbf{Performance-Aware Accelerator Design for ML workloads} $|$ \textit{\textbf{Python}}}{02/2024 - 03/2024}
+        \resumeItemListStart
+            \resumeItem{Conducted DSE using Scale-Sim to optimize systolic array configurations for LeNet CNN, achieving 57\% average mapping efficiency for operators while evaluating performance trade-offs across dataflow configurations.}
+            \resumeItem{Developed a mapping strategy (mapping efficiency 84.375\%) to mitigate faulty processing elements in a weight-stationary 3x3 systolic array, optimizing GEMM computation latency (54 cycles).}
+        \resumeItemListEnd
+        \vspace{-15pt}
+
+        \resumeProjectHeading {\textbf{MIPS CPU and CMP memory simulator} $|$ \textit{\textbf{C++}}}{09/2023 - 12/2023}
+        \resumeItemListStart
+            \resumeItem{Developed a 5-stage (8-pipe) MIPS CPU simulator with Out-of-Order execution, GShare Branch Prediction, and optimized cache hierarchy, reducing CPI by 50\% and latency by 10\%.}
+            \resumeItem{Engineered a dual-core simulator with L1, L2-shared caches (LRU \& random eviction) and DRAM, optimized L2 utilization via SWP \& DWP for a 0.85\% performance gain.}
+        \resumeItemListEnd 
+        
+    \normalsize
+  \resumeSubHeadingListEnd
+\vspace{-15pt}
+
+%-----------EXPERIENCE-----------
+% \section{Teaching Experience}
+%   \resumeSubHeadingListStart
+%   \small
+%     \resumeSubheading
+%       {Graduate Teaching Assistant (CS 6340 : Software Analysis and Testing)}{08/2024 -- 12/2024}
+%       {\textbf{Dept. of Computer Science, Georgia Institute of Technology}}{Atlanta, GA}
+%       \resumeItemListStart
+%         \resumeItem{Delivered a class session for 35 students on SVF framework, including a live tutorial \& debugging strategies.}
+%         \resumeItem{Conducted weekly office hours mentoring students on assignments and final project. Assisted in developing 21 test cases for the project and evaluated students' implementation strategies for technical rigor.}
+%       \resumeItemListEnd
+%   \resumeSubHeadingListEnd
+% \vspace{-18pt}
+
+%-----------PROJECTS-----------
+% \section{Projects}
+%     \vspace{-5pt}
+%     \resumeSubHeadingListStart
+%     \small
+     % \resumeProjectHeading {\textbf{Algorithm-to-hardware co-optimization of Connected Component Analysis} $|$ \textit{\textbf{HLS, C++}} \href{https://github.com/KarthikeyaSharma16/ECE8893_HLS_Prj/tree/hls_opt}{\raisebox{-0.02\height}\faGithub\ }}{04/2025 - 05/2025}
+     %    \resumeItemListStart
+     %        \resumeItem{Translated a recursive Python particle tracking pipeline into a golden C++ model, enabling synthesis by eliminating dynamic memory, recursion, and polymorphic structures.}
+     %        \resumeItem{Achieved 14.8$\times$ speedup for connected component analysis using a Union-Find FPGA kernel, achieving 1.58\,$\mu$s per-graph latency on 200-event workloads with Vitis HLS compared to CPU baseline.}
+     %        \resumeItem{Reduced LUT usage by 67\% through five-stage hardware optimization, including loop pipelining, array partitioning, struct aggregation and FIFO streaming support.}
+     %    \resumeItemListEnd
+     %  \vspace{-15pt}
+      
+     % \resumeProjectHeading {\textbf{Efficient Implementation of Attention Computation} $|$ \textit{\textbf{HLS, C++}}}{02/2025}
+     %    \resumeItemListStart
+     %        \resumeItem{Optimized a scaled dot-product attention mechanism in HLS (110$\times$ speedup), used AXI burst mode and ping-pong buffering to overlap computation \& data transfer, maximizing DRAM bandwidth of the FPGA SoC.}
+     %    \resumeItemListEnd
+     %  \vspace{-15pt}
+      
+        % \resumeProjectHeading {\textbf{GPU-Accelerated Framework for Hyperspectral Raman Imaging} $|$ \textit{\textbf{Python}}}{08/2024 - 12/2024}
+        % \resumeItemListStart
+        %     \resumeItem{Achieved 10× speedup for a pipelined architecture to stream multi-dimensional spectral data, enabling efficient vectorized signal processing transformations and automated metrics for SVD vector selection.}
+        % \resumeItemListEnd
+        % \vspace{-15pt}
+        
+      % \resumeProjectHeading {\textbf{Systolic Array Accelerator} $|$ \textit{\textbf{Verilog}, \textbf{Python}}}{06/2024 - 08/2024}
+      %   \resumeItemListStart
+      %       \resumeItem{Built a 4x4 Systolic Array ($@$1 GHz), with MAC modules supporting pipelined FP32 addition and multiplication, achieving 2 operations per cycle per MAC.}
+      %       \resumeItem{Supported sparse representations (CSR, CSC), weight stationary dataflow \& access latency through AXI3 bursts.}
+      %   \resumeItemListEnd
+      %   \vspace{-15pt}
+        
+        
+
+        % \resumeProjectHeading {\textbf{Context-aware Deepfake Detection} $|$ \textit{\textbf{Python}}}{02/2024 - 05/2024}
+        % \resumeItemListStart
+        %     \resumeItem{Created custom dataset from YouTube \& Reddit of 1298 videos to provide contextual information for HMCAN model.}
+        %     \resumeItem{Cleaned metadata for better tokenization and feature extraction achieving training accuracy of 91.7\%.}
+        % \resumeItemListEnd
+        % \vspace{-15pt}
+        
+      %   \resumeProjectHeading {\textbf{DUT Verification Framework} $|$ \textit{\textbf{SystemVerilog}}}{12/2023 - 01/2024}
+      %   \resumeItemListStart
+      %       \resumeItem{Formulated verification plans for evaluating quality of handwritten RTL designs such as Circular FIFO, SPI, UART, I2C, and AXI3 memory through a hierarchical testbench architecture achieving 100\% functional coverage.}
+      %   \resumeItemListEnd
+      % \vspace{-15pt}
+
+       %  \resumeProjectHeading {\textbf{Multithreaded 3D Scene Animation} $|$ \textit{\textbf{C++}}}{11/2023 - 12/2023}
+       %  \resumeItemListStart
+       %      \resumeItem{Created an interactive 3D Halloween themed scene using OpenGL, incorporating multiple objects to create scene depth.}
+       %      \resumeItem{Utilized OpenMP to enable independent movement, rotation, and realistic collisions of 5 animated objects.}
+       %  \resumeItemListEnd
+       % \vspace{-15pt}
+      
+      % \resumeProjectHeading {\textbf{MIPS CPU and CMP memory simulator} $|$ \textit{\textbf{C++}}}{09/2023 - 12/2023}
+      %   \resumeItemListStart
+      %       \resumeItem{Developed a 5-stage (8-pipe) MIPS CPU simulator with Out-of-Order execution, GShare Branch Prediction, and optimized cache hierarchy, reducing CPI by 50\% and latency by 10\%.}
+      %       \resumeItem{Engineered a dual-core simulator with L1, L2-shared caches (LRU \& random eviction) and DRAM, optimized L2 utilization via SWP \& DWP for a 0.85\% performance gain.}
+      %   \resumeItemListEnd 
+      %   \vspace{-15pt}
+
+        % \resumeProjectHeading {\textbf{FaultForge-Sim for Post-Silicon Validation} $|$ \textit{\textbf{C++}} \href{https://github.com/KarthikeyaSharma16/FaultForge-Sim}{\raisebox{-0.02\height}\faGithub\ }}{08/2023 - 12/2023}
+        % \resumeItemListStart
+        %     \resumeItem{Built a logic simulator for parsing netlist enabling fault-free evaluation. Applied PODEM ATPG algorithm for test vector generation and achieved 99.71\% fault coverage using deductive fault simulation.}
+        % \resumeItemListEnd
+        
+%         \normalsize
+%     \resumeSubHeadingListEnd
+% \vspace{-15pt}
+
+ \section{Publications}
+\resumeSubHeadingListStart
+    \item
+    \small
+    \resumeItemListStart
+        \resumeItem{Xu, H., Chen, W., Dixon, J. Z., Maharaj, D. S., \textbf{Sharma, K. M.}, Audier, X., Cicerone, M. T. Ultra-high Information-content Chemical Imaging with Broadband Coherent Anti-Stokes Raman and Two-photon Fluorescence Lifetime Microscopy. J. Vis. Exp. (224), e68845, doi:10.3791/68845 (2025). \textbf{\textit{(Published Oct 7, 2025)}}}
+        \resumeItem{\textbf{K. S. Maheswaran}, C. Bossut, A. Wanna, Q. Zhang and C. Hao, "Cryptonite: Scalable Accelerator Design for Cryptographic Primitives and Algorithms," 2025 IEEE 36th International Conference on Application-specific Systems, Architectures and Processors (ASAP), Vancouver, BC, Canada, 2025, pp. 17-24, doi: 10.1109/ASAP65064.2025.00013. \textbf{\textit{(Published July 31, 2025)}}}
+        \resumeItem{\textbf{K. S. M}, A. Rao, K. Kumar and T. R. Rao, "Terahertz Imaging for Aerospace Applications," 2023 International Conference on Wireless Communications Signal Processing and Networking (WiSPNET), Chennai, India, 2023, pp. 01-05, doi: 10.1109/WiSPNET57748.2023.10134245. \textbf{\textit{(Published May 30, 2023)}}}
+    \resumeItemListEnd
+    \normalsize
+\resumeSubHeadingListEnd
+
+% %-----------ACADEMIC ACHIEVEMENTS---------------
+% \section{Academic Achievements}
+% \resumeSubHeadingListStart
+%     \item
+%     \small
+%     \resumeItemListStart 
+%         \resumeItem{Secured 5th Academic position throughout B.Tech by Department of ECE, SRM University May 2023.}
+%         \resumeItem{Secured Best Project Runner-Up award for innovation in "Terahertz Imaging for Aerospace Applications" at COMSPRO Capstone Project Expo 2023, SRM University.}
+%         \resumeItem{Three-time successive recipient of \textbf{Performance-Based Scholarship} annually awarded by Department of ECE, SRM University 2021-23.}
+%     \resumeItemListEnd
+%     \normalsize
+% \resumeSubHeadingListEnd
+% \vspace{-10pt}
+
+\end{document}

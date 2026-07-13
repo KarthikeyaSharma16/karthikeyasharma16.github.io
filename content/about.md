@@ -19,6 +19,6 @@ In addition to my academic pursuits, I enjoy playing games, watching Formula 1, 
 
 ### Contact
 
-- **Email:** [karthikeyasharma@hotmail.com](mailto:karthikeyasharma@hotmail.com)
-- **Location:** 266 Ferst Drive, Atlanta, Georgia, 30309, USA
-- **Résumé:** [PDF](/pdf/Resume_hotmail.pdf)
+- **Email:** [sharmakarthikeya6@gmail.com](mailto:sharmakarthikeya6@gmail.com)
+- **Location:** Bellevue, Washington, USA
+- **Résumé:** [PDF](/pdf/resume.pdf) · [LaTeX source](/tex/resume.tex)

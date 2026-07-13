@@ -1,3 +1,321 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* Focus-area cards. The --key hue on each card matches its node in the
+     research-interests flowchart, so the two blocks read as one system. */
+  .focus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+    gap: 0.85rem;
+    margin: 1.25rem 0 2rem;
+  }
+
+  .focus-card {
+    --key: var(--secondary);
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--key);
+    border-radius: 6px;
+    padding: 1rem 1.1rem 1.1rem;
+  }
+
+  .focus-card h4 {
+    margin: 0 0 0.55rem;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    color: var(--primary);
+  }
+
+  .focus-card ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .focus-card li {
+    position: relative;
+    padding-left: 0.85rem;
+    font-size: 0.86rem;
+    line-height: 1.45;
+    color: var(--secondary);
+  }
+
+  .focus-card li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.58em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--key);
+  }
+
+  .focus-card li b { color: var(--primary); font-weight: 600; }
+
+  /* Education rows. The default h3 renders these two-line entries at hero size;
+     these are data, so they get a compact row instead. */
+  .edu-list { display: grid; gap: 0.6rem; margin: 1.25rem 0 2rem; }
+
+  .edu {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.9rem 1.05rem;
+  }
+
+  .edu-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+  }
+
+  .edu-degree {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary);
+    line-height: 1.35;
+  }
+
+  .edu-when {
+    font-size: 0.78rem;
+    color: var(--secondary);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .edu-inst {
+    margin-top: 0.15rem;
+    font-size: 0.88rem;
+    color: var(--secondary);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .edu-gpa {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.05rem 0.5rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Merit Pages verification, attached to the degree it verifies. */
+  .verified {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 0.7rem;
+    padding-top: 0.7rem;
+    border-top: 1px dashed var(--border);
+    font-size: 0.8rem;
+    color: var(--secondary);
+  }
+
+  .verified svg { flex: none; color: #0F6E56; }
+  .verified a { text-decoration: none; border-bottom: 1px solid var(--border); }
+  .verified a:hover { border-bottom-color: currentColor; }
+
+  /* Shared entry card — work, projects, teaching. Same row grammar as .edu:
+     title and dates on one line, context beneath, then the bullets. */
+  .entry-list { display: grid; gap: 0.6rem; margin: 1.25rem 0 2rem; }
+
+  .entry-card {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.95rem 1.1rem 1rem;
+  }
+
+  .entry-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+  }
+
+  .entry-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary);
+    line-height: 1.35;
+  }
+
+  .entry-when {
+    font-size: 0.78rem;
+    color: var(--secondary);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .entry-sub {
+    margin-top: 0.15rem;
+    font-size: 0.88rem;
+    color: var(--secondary);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .entry-card ul {
+    margin: 0.7rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .entry-card li {
+    position: relative;
+    padding-left: 0.9rem;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--secondary);
+  }
+
+  .entry-card li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--primary);
+    opacity: 0.55;
+  }
+
+  .entry-card li b, .entry-card li strong { color: var(--primary); font-weight: 600; }
+
+  /* A rotation/stint within one role. */
+  .stint { margin-top: 0.9rem; }
+
+  .stint-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.2rem 1rem;
+    padding-bottom: 0.45rem;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .stint-name { font-size: 0.86rem; font-weight: 600; color: var(--primary); }
+  .stint-when {
+    font-size: 0.75rem;
+    color: var(--secondary);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  /* Small pills: tech stack, links, "Current". */
+  .pill {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--secondary);
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.05rem 0.5rem;
+    white-space: nowrap;
+  }
+  .pill-now { color: #0F6E56; border-color: #0F6E56; }
+  a.pill { text-decoration: none; }
+  a.pill:hover { color: var(--primary); border-color: var(--secondary); }
+
+  /* Publications. */
+  .pub-list { display: grid; gap: 0.55rem; margin: 1.25rem 0 2rem; }
+
+  .pub {
+    display: grid;
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+    gap: 0.9rem;
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.85rem 1.05rem;
+  }
+
+  .pub-year {
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--secondary);
+    font-variant-numeric: tabular-nums;
+    padding-top: 0.15rem;
+  }
+
+  .pub-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primary);
+    line-height: 1.35;
+  }
+
+  .pub-meta {
+    margin-top: 0.3rem;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--secondary);
+  }
+  .pub-meta .me { color: var(--primary); font-weight: 600; }
+  .pub-meta .venue { font-style: italic; }
+
+  @media (max-width: 520px) {
+    .pub { grid-template-columns: minmax(0, 1fr); gap: 0.25rem; }
+  }
+</style>
+
+{{/* Mermaid, loaded only on pages that use it. This lives in head rather than
+     extend_footer because PaperMod pulls the footer through partialCached, keyed
+     by layout/kind — so every page shares one footer and per-page checks fail there. */}}
+{{ if and .IsPage (in .RawContent "```mermaid") }}
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+
+  // Nodes carry their own fill/stroke/color, so only the connective tissue
+  // (edges, arrowheads, labels) has to survive the light/dark toggle.
+  mermaid.initialize({
+    startOnLoad: true,
+    securityLevel: "loose",
+    theme: "base",
+    // The diagram sits inside a <pre>, so an inherited font family resolves to the
+    // code face; name the body face explicitly. Auto-wrap must stay off or Mermaid
+    // re-wraps markdown labels past the node box and clips them.
+    markdownAutoWrap: false,
+    themeVariables: {
+      fontFamily: "Inter, system-ui, sans-serif",
+      fontSize: "14px",
+      lineColor: "#8A8F98",
+      primaryTextColor: "#8A8F98",
+    },
+    // Default wrappingWidth is narrow enough to break labels mid-word.
+    flowchart: { curve: "basis", useMaxWidth: true, wrappingWidth: 560, htmlLabels: true },
+  });
+</script>
+<style>
+  pre.mermaid {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    text-align: center;
+    overflow-x: auto;
+  }
+  pre.mermaid:not([data-processed="true"]) { visibility: hidden; }
+  pre.mermaid svg { max-width: 100%; height: auto; }
+</style>
+{{ end }}

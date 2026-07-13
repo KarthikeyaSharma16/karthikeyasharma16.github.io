@@ -62,10 +62,10 @@ pagination.pagerSize = 10
     url = "https://instagram.com/sharma.karthikeya"
   [[params.socialIcons]]
     name = "email"
-    url = "mailto:karthikeyasharma@hotmail.com"
+    url = "mailto:sharmakarthikeya6@gmail.com"
   [[params.socialIcons]]
     name = "cv"
-    url = "/pdf/Resume_hotmail.pdf"
+    url = "/pdf/resume.pdf"
 
 # Nav entries. `make new-section name=<x>` appends here automatically.
 [[menu.main]]
