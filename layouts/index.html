@@ -1,0 +1,18 @@
+{{- define "main" }}
+
+{{/* PaperMod's list.html renders the profile OR the home content, never both.
+     The About text lives in content/_index.md, so the home page renders the
+     profile as a compact header and the content directly beneath it. */}}
+<div class="home-hero">
+  {{- partial "index_profile.html" . }}
+</div>
+
+{{- if .Content }}
+<article class="post-content md-content home-about">
+  {{- if not (.Param "disableAnchoredHeadings") }}
+  {{- partial "anchored_headings.html" .Content -}}
+  {{- else }}{{ .Content }}{{ end }}
+</article>
+{{- end }}
+
+{{- end }}

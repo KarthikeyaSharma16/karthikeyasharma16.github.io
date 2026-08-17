@@ -1,0 +1,52 @@
+{{- define "main" }}
+
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}<div class="post-description">{{ . | markdownify }}</div>{{ end }}
+</header>
+
+{{/* Two kinds of news item live in this section:
+
+     - One-liners whose body just restates the headline (sometimes with a link
+       in it). Clicking through to a page holding a single sentence is a dead
+       end, so those render inline and are not links.
+     - Real write-ups. Those get a "Read" affordance and link to their page, so
+       it is visible from the archive which rows are worth clicking.
+
+     A row counts as a write-up if it runs past 30 words (comfortably above the
+     longest one-liner) or carries a photo — the WiSPNET post is only ~25 words
+     but the conference picture is the point of it.
+
+     `category` in a page's front matter colors the rail down the left edge:
+     education, research, or industry. */}}
+{{- $threshold := 30 }}
+
+<div class="news-feed">
+  {{- range .RegularPages.ByDate.Reverse }}
+  {{- $cat := .Params.category | default "" | lower }}
+  {{- $date := printf `<time class="news-date" datetime="%s">%s</time>` (.Date.Format "2006-01-02") (.Date.Format "Jan 2, 2006") }}
+  {{- $isArticle := or (ge .WordCount $threshold) (strings.Contains .Content "<img") }}
+
+  {{- if $isArticle }}
+  <a class="news-item news-item--article{{ with $cat }} cat-{{ . }}{{ end }}" href="{{ .RelPermalink }}">
+    {{ $date | safeHTML }}
+    <span class="news-main">
+      <span class="news-headline">{{ .Title }}</span>
+      <span class="news-read">Read
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="13" height="13" aria-hidden="true">
+          <path d="M5 12h13M13 6l6 6-6 6" />
+        </svg>
+      </span>
+    </span>
+  </a>
+  {{- else }}
+  <div class="news-item{{ with $cat }} cat-{{ . }}{{ end }}">
+    {{ $date | safeHTML }}
+    <span class="news-main"><span class="news-line">{{ .Content }}</span></span>
+  </div>
+  {{- end }}
+
+  {{- end }}
+</div>
+
+{{- end }}

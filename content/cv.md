@@ -5,131 +5,15 @@ showToc: true
 TocOpen: true
 ---
 
-[Download the PDF résumé](/pdf/resume.pdf) · [LaTeX source](/tex/resume.tex)
-
 ## General Information
 
 |  |  |
 | --- | --- |
 | **Full name** | Karthikeya Sharma M |
 | **Email** | [sharmakarthikeya6@gmail.com](mailto:sharmakarthikeya6@gmail.com) |
+| **Website** | [karthikeyasharma16.github.io](https://karthikeyasharma16.github.io/) |
 | **Languages** | English (fluent), Hindi (fluent), Tamil (native), Telugu (fluent) |
 | **Socials** | [LinkedIn](https://www.linkedin.com/in/karthikeyasharma16/) · [GitHub](https://github.com/KarthikeyaSharma16) · [Google Scholar](https://scholar.google.com/citations?user=O4Tya_YAAAAJ&hl=en) · [Merit Pages](https://meritpages.com/KarthikeyaSharma16) |
-
-I am a Hardware Engineer at MangoBoost, Inc., working on DPU system architecture and GPU-server workload analysis. I care about the full path from an application workload down to the silicon that runs it: inference serving and agents at the top, then the compilers, operating system, and kernels beneath them, down to the CPU, GPU, DPU, ASIC, and NPU architectures they execute on. Most of my work lives in making that stack scale — across the network with RDMA (RoCEv2) and NVMe-over-RDMA for I/O acceleration, and within a node through prefetch, offload, and hardware-software co-design.
-
-## Research Interests
-
-Compiler, OS, Kernel design, Inference serving, Systems Engineering, and Architecture.
-
-```mermaid
-flowchart TD
-    A["`**Inference serving**
-    vLLM · continuous batching · PagedAttention · tensor parallelism`"]
-
-    B["`**High-performance kernels**
-    CPU (AVX/SIMD) · CUDA · ASIC · warp scheduling · memory coalescing`"]
-
-    C["`**Compiler design**
-    IR · passes · codegen · auto-vectorization`"]
-    D["`**Systems engineering**
-    KVCache accel · NVMe-over-RDMA · scheduling
-    prefetch weights · prediction algorithms`"]
-
-    E["`**OS**
-    Process/thread scheduling · memory management · device drivers · NUMA`"]
-
-    F["`**CPU arch**
-    Pipeline · cache hierarchy · branch prediction`"]
-    G["`**GPU arch**
-    SM · tensor cores · HBM · NVLink · PCIe`"]
-    H["`**DPU arch**
-    RDMA · offload networking · storage acceleration`"]
-
-    I["`**Hardware design — HLS / Verilog RTL**
-    High-level synthesis · C-to-RTL · register transfer level · timing closure`"]
-
-    A --> B
-    B --> C
-    B --> D
-    C --> E
-    D --> E
-    E --> F
-    E --> G
-    E --> H
-    F --> I
-    G --> I
-    H --> I
-
-    style A fill:#534AB7,stroke:#3C3489,color:#CECBF6
-    style B fill:#185FA5,stroke:#0C447C,color:#B5D4F4
-    style C fill:#854F0B,stroke:#633806,color:#FAC775
-    style D fill:#993C1D,stroke:#712B13,color:#F5C4B3
-    style E fill:#444441,stroke:#2C2C2A,color:#D3D1C7
-    style F fill:#185FA5,stroke:#0C447C,color:#B5D4F4
-    style G fill:#0F6E56,stroke:#085041,color:#9FE1CB
-    style H fill:#993C1D,stroke:#712B13,color:#F5C4B3
-    style I fill:#3B6D11,stroke:#27500A,color:#C0DD97
-```
-
-### Focus Areas
-
-<div class="focus-grid">
-
-<div class="focus-card" style="--key:#534AB7">
-  <h4>Application Workloads &amp; Deployments</h4>
-  <ul>
-    <li><b>Inference serving</b> — vLLM, continuous batching, PagedAttention, tensor parallelism</li>
-    <li><b>AI agents</b> — session profiling, tool-call latency, offloading strategies</li>
-    <li>On-prem and sandboxed deployment, framework benchmarking</li>
-  </ul>
-</div>
-
-<div class="focus-card" style="--key:#854F0B">
-  <h4>Compilers, OS &amp; Kernels</h4>
-  <ul>
-    <li><b>Compiler design</b> — IR, passes, codegen, auto-vectorization</li>
-    <li><b>OS</b> — process/thread scheduling, memory management, device drivers, NUMA</li>
-    <li><b>Kernels</b> — CPU (AVX/SIMD), CUDA, warp scheduling, memory coalescing</li>
-  </ul>
-</div>
-
-<div class="focus-card" style="--key:#993C1D">
-  <h4>Systems Engineering — Scalability</h4>
-  <ul>
-    <li><b>Across the network</b> — RDMA (RoCEv2), NVMe-over-RDMA for I/O acceleration, storage disaggregation</li>
-    <li><b>Within the node</b> — weight prefetch, KV-cache acceleration, offload, prediction algorithms</li>
-  </ul>
-</div>
-
-<div class="focus-card" style="--key:#0F6E56">
-  <h4>Processor &amp; Accelerator Architecture</h4>
-  <ul>
-    <li><b>CPU</b> — pipeline, cache hierarchy, branch prediction</li>
-    <li><b>GPU</b> — SM, tensor cores, HBM, NVLink, PCIe</li>
-    <li><b>DPU</b> — RDMA, networking offload, storage acceleration</li>
-    <li><b>ASIC &amp; NPU</b> — domain-specific accelerator design</li>
-  </ul>
-</div>
-
-<div class="focus-card" style="--key:#185FA5">
-  <h4>Hardware-Software Co-design</h4>
-  <ul>
-    <li>Sparse and dense dataflow accelerators — algorithm-to-hardware design</li>
-    <li>Programming model (workload mapping)</li>
-    <li>Interconnection network optimization for distributed training and inference</li>
-  </ul>
-</div>
-
-<div class="focus-card" style="--key:#3B6D11">
-  <h4>Reconfigurable Architectures</h4>
-  <ul>
-    <li><b>FPGA</b> — routing, placement, and timing optimization</li>
-    <li><b>CGRA</b> — reconfigurable interconnects, dynamic partial reconfiguration</li>
-  </ul>
-</div>
-
-</div>
 
 ## Education
 
@@ -174,7 +58,8 @@ flowchart TD
 | **Coding** | C/C++, CUDA C, *Scripting* (Python, Bash, TCL), *RTL* (Verilog, SystemVerilog), High-Level Synthesis |
 | **Tools** | Vivado, Vitis HLS, ModelSim, Verdi, VCS |
 | **Agents** | Claude Code, OpenCode |
-| **Protocols** | AXI (AXI-MM, AXIS, AXI-Lite), QDMA, PCIe |
+| **Protocols** | AXI (AXI-MM, AXIS, AXI-Lite), QDMA, PCIe, RoCEv2 (RDMA), NVMe-over-RDMA |
+| **Interconnects** *(research interest)* | CXL, NVLink / NVLink-C2C, UALink |
 | **Libraries** | OpenMP, OpenMPI, NeMo Guardrails |
 | **Coursework** | Advanced Computer Architecture, Hardware-Software Co-Design for ML Systems, Parallel Programming for FPGA, Advanced Programming Techniques, Machine Learning, VLSI Design, Microprocessors & Microcontrollers |
 
@@ -194,36 +79,37 @@ flowchart TD
 
   <div class="stint">
     <div class="stint-head">
-      <span class="stint-name">System Architecture &amp; Implementation — Hardware Development Group</span>
-      <span class="stint-when">Jul 2025 – Dec 2025</span>
+      <span class="stint-name">System Architecture &amp; Implementation — Hardware Development</span>
+      <span class="stint-when">Jul 2025 – Jan 2026</span>
     </div>
     <ul>
-      <li>Served as core architect of Data Plane Studio (DPS) for the <a href="https://www.mangoboost.io/products/hardware/mango-boostx-tm"><b>Mango BoostX 400G DPU</b></a>, enabling scalable reuse of a single hardware architecture across multiple use cases (RoCEv2 AI, NVMe-over-RDMA, NVMe-over-TCP Initiator).</li>
-      <li>Owned <b>PCIe and DMA</b> feature development and reset-tree architecture, resolving critical hardware functional issues prior to delivering alpha-verified milestones for the MangoBoost–SK Hynix joint project.</li>
+      <li>Served as core architect of Data Plane Studio (DPS) for the <a href="https://www.mangoboost.io/products/boostx/overview"><b>Mango BoostX 400G DPU</b></a>, enabling scalable reuse of a single hardware architecture across multiple use cases: RoCEv2, NVMe-over-RDMA, and NVMe-over-TCP Initiator.</li>
+      <li>Contributed to <b>PCIe and DMA</b>-centric feature development, resolving critical functional, timing, and performance bottlenecks — including root-causing DMA transaction stalls to NUMA topology and stabilizing the reset-tree architecture — to ensure delivery of DPS for alpha-verified milestones.</li>
+      <li>Developed an encrypted, IP-protected package for DPS to secure and obfuscate proprietary hardware designs, accelerating early-adopter onboarding by delivering high-performance demo examples and comprehensive user guides.</li>
+      <li>Built scalable testbenches for demo examples using <b>cocotb</b>, featuring Python-based BFMs and custom test cases to empower users to independently validate design functionality in simulation.</li>
       <li>Built automation scripts to streamline DPU testing, and enhanced the CI/CD workflow for sanity testing — covering synthesis/implementation checks, functional verification, and network performance tests.</li>
       <li>Extended the testing pipeline by authoring SKILLS.md definitions and configuring coding agents (OpenCode, Claude Code) to autonomously perform DPU validation runs alongside existing automation.</li>
-      <li>Built an IP-protected package for DPS that encrypts and obfuscates proprietary designs; authored user documentation for early adopters to accelerate their IP development.</li>
     </ul>
   </div>
 
   <div class="stint">
     <div class="stint-head">
-      <span class="stint-name">GPU Server Taskforce — Workload Analysis &amp; Performance Optimization</span>
-      <span class="stint-when">Jan 2026 – Present</span>
+      <span class="stint-name">Solution Architecture Group — Workload Analysis &amp; Performance Optimization</span>
+      <span class="stint-when">Feb 2026 – Present</span>
     </div>
     <ul>
-      <li>Characterized application-level GPU server workloads, benchmarking end-to-end performance to expose bottlenecks and guide optimization targets across the software–hardware stack.</li>
-      <li>Benchmarked AI agent workloads, profiling coding-agent sessions to identify <b>high tool-call volume</b> as a key latency driver, then proposed tool-call offloading strategies to reduce it with a PoC.</li>
-      <li>Evaluated on-prem deployment strategies for application workloads (guardrails, coding agents) to inform infrastructure and performance decisions.</li>
-      <li>Built a sandboxed environment for running Claude Code and an AI Benchmarker that evaluates any framework within the sandbox (e.g., vLLM and llama.cpp performance on Strix Halo) and reports results.</li>
-      <li>Investigated NVMe-over-RDMA for storage-disaggregated use cases (e.g., model offloading to SSDs).</li>
+      <li>Investigated state-of-the-art rack-scale AI infrastructure, software stacks (NVAIE, AMD AI), and microservices (e.g., guardrails) to evaluate existing deployment methodologies, assessing how on-the-fly DPU processing can optimize system workloads.</li>
+      <li>Profiled execution traces of coding-agent sessions (Claude Code, OpenCode) to characterize agentic workflows, identifying <b>high-frequency tool-call volumes</b> as a primary overhead for the CPU.</li>
+      <li>Developed a LangChain-based agentic flow integrated with NeMo Guardrails, serving models with vLLM (1 primary LLM, 2 guardrail models) across 3 servers to benchmark latency overhead and throughput degradation.</li>
+      <li>Engineered a sandboxed testing environment and an AI benchmarker to securely execute coding agents and evaluate the performance of inference frameworks (e.g., vLLM, llama.cpp).</li>
+      <li>Evaluated additional use cases for expanding DPUs in scale-out system architectures: NVMe-over-RDMA for storage disaggregation (KV-cache offloading), KV-cache compression, and accelerating guardrails on DPUs.</li>
     </ul>
   </div>
 </div>
 
 </div>
 
-## Projects
+## Research Experience
 
 <div class="entry-list">
 
@@ -256,6 +142,12 @@ flowchart TD
     <li>Enabled heterogeneous topology translation and an interactive visualizer for analysis of GPU network collective flows and patterns for congestion and switch modeling.</li>
   </ul>
 </div>
+
+</div>
+
+## Projects
+
+<div class="entry-list">
 
 <div class="entry-card">
   <div class="entry-top">
@@ -356,3 +248,10 @@ flowchart TD
 </div>
 
 </div>
+
+## Contact
+
+- **Email:** [sharmakarthikeya6@gmail.com](mailto:sharmakarthikeya6@gmail.com)
+- **LinkedIn:** [linkedin.com/in/karthikeyasharma16](https://www.linkedin.com/in/karthikeyasharma16/)
+- **GitHub:** [github.com/KarthikeyaSharma16](https://github.com/KarthikeyaSharma16)
+- **Google Scholar:** [scholar.google.com](https://scholar.google.com/citations?user=O4Tya_YAAAAJ&hl=en)

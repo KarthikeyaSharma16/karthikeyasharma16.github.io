@@ -32,15 +32,12 @@ pagination.pagerSize = 10
   [params.profileMode]
     enabled = true
     title = "Karthikeya Sharma"
-    subtitle = "MS Computer Engineering, Georgia Institute of Technology<br/>Hardware-Software Co-design · Reconfigurable Computing · EDA"
-    imageUrl = "/img/prof_pic.jpg"
+    subtitle = "MS Computer Engineering, Georgia Institute of Technology"
+    imageUrl = "img/profile.jpg"
     imageTitle = "Karthikeya Sharma"
-    imageWidth = 160
-    imageHeight = 160
+    imageWidth = 200
+    imageHeight = 200
 
-    [[params.profileMode.buttons]]
-      name = "Projects"
-      url = "projects"
     [[params.profileMode.buttons]]
       name = "CV"
       url = "cv"
@@ -58,25 +55,14 @@ pagination.pagerSize = 10
     name = "googlescholar"
     url = "https://scholar.google.com/citations?user=O4Tya_YAAAAJ&hl=en"
   [[params.socialIcons]]
-    name = "instagram"
-    url = "https://instagram.com/sharma.karthikeya"
-  [[params.socialIcons]]
     name = "email"
     url = "mailto:sharmakarthikeya6@gmail.com"
-  [[params.socialIcons]]
-    name = "cv"
-    url = "/pdf/resume.pdf"
 
 # Nav entries. `make new-section name=<x>` appends here automatically.
 [[menu.main]]
-  identifier = "about"
-  name = "About"
-  url = "/about/"
-  weight = 10
-[[menu.main]]
-  identifier = "projects"
-  name = "Projects"
-  url = "/projects/"
+  identifier = "news"
+  name = "News"
+  url = "/news/"
   weight = 20
 [[menu.main]]
   identifier = "publications"
@@ -88,8 +74,3 @@ pagination.pagerSize = 10
   name = "CV"
   url = "/cv/"
   weight = 40
-[[menu.main]]
-  identifier = "blog"
-  name = "Blog"
-  url = "/blog/"
-  weight = 60

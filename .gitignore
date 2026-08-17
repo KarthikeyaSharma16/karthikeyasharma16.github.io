@@ -2,3 +2,10 @@ public/
 resources/
 .hugo_build.lock
 .DS_Store
+
+# Full-size photo originals and source documents. The web-sized copies the site
+# actually serves live in static/img/; these stay local so they never bloat the
+# repo (the booth PNG alone is 33MB) or publish anything not meant to be public.
+assets/img/*
+!assets/img/profile.jpg
+assets/*.pdf
