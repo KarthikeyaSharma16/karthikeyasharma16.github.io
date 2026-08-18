@@ -6,7 +6,7 @@ TocOpen: true
 ---
 
 ## Research Background
-My main background is in computer architecture, and more recently systems engineering. 
+My main background is in computer architecture, and more recently systems engineering. Below is an overview of the areas I have worked on across my academic research and industry roles:
 
 - **Computer Architecture**
   - CPU & GPU microarchitecture
@@ -15,11 +15,10 @@ My main background is in computer architecture, and more recently systems engine
     - Algorithm-to-hardware co-design and workload mapping
   - FPGA design
     - High-Level Synthesis
-- **Networking**
+- **Networking hardware architecture**
   - Shell & NIC design for programmable DPUs (BoostX VP1202, U45N)
 - **Systems Engineering**
-  - RDMA 
-  - NVMe-over-RDMA
+  - NVMe-over-RDMA Target
   - Network fabric offload — DPU and SmartNIC datapaths
   - Data Center Architecture (Rack-Scale infrastructure)
     - Reference Architectures such as NVIDIA HGX, STX etc.
@@ -34,36 +33,40 @@ My research interests cover (but are not limited to) the topics I list below:
   - CPU microarchitecture
   - Dataflow accelerators
     - Compiler and DSLs for custom accelerators
+    - Design-space exploration
+    - Algorithm-to-hardware co-design and workload mapping
   - Interconnects and fabrics (PCIe, CXL, NVLink/UALink etc)
   - Heterogenous computing
-- **Networking**
-  - NIC & DPU architecture
-  - CXL-NIC architecture
+- **Networking hardware architecture & fabric protocols**
+  - **Hardware Architecture**: NIC (PCIe-based, CXL-based), DPU
+  - **Fabric protocols**: Infiniband, RDMA (ROCEv2), NVMe-oF
+  - **Congestion and Routing**: Pack Spraying, Programmable Congestion Control 
 - **Systems Engineering**
-  - RDMA (RoCEv2), Infiniband
   - GPUDirect RDMA
   - NVMe-over-RDMA for Storage disaggregation
   - Network fabric offload — DPU and SmartNIC datapaths
   - KV-cache offloading & compression
+  - Context Memory Storage (based on NVIDIA CMX using BF-4 DPUs)
 - **System Software**
   - Collective communication libraries (NCCL, MSCCL) and transfer libraries (NIXL)
-  - Inference serving and KV-cache management (vLLM, LMCache)
+  - KV-cache management (LMCache)
 
 ## Research Vision
 
 As AI infrastructure scales to support agentic workloads, performance is constrained by full-system optimization: from the software stack down to the network fabric and the system's ability to handle on-the-fly data processing as workloads scale out. My research would focus on answering three key questions:
 
-1. How should data move between accelerators, hosts, and storage once a model outgrows a single node?
-2. What belongs on the network fabric — the DPU, the SmartNIC, the interconnect — and what belongs in the software stack above it?
-3. What do serving frameworks and communication libraries have to change to use those fabrics well?
+1. What belongs on the network fabric — the DPU, the SmartNIC, the interconnect — and what belongs in the software stack above it?
+2. What system architectures, storage semantics (block vs. object), and fabric protocols (like NVMe-oF) are necessary to achieve the data movement efficiency required to keep accelerators fully utilized?
+3. What level of control should system software have over network hardware, and what abstractions are necessary for applications—like distributed inference serving—to fully exploit the underlying fabric?
 
 ## How These Fit Together
 
 The diagram below summarizes my view of the software and hardware ecosystem — my **primary** interest
-areas and **secondary / supporting** ones. Systems engineering sits in the middle because that is where
-the two sides meet: it is the work of making a software stack actually exploit the hardware beneath it.
+areas and **secondary / supporting** ones. 
 
-**Click any box in the flowchart below to open its details.**
+Systems engineering sits in the middle because it is fundamentally bidirectional: the software stack must be optimized to fully exploit the hardware beneath it, while architecting the hardware to better serve the applications above it.
+
+> **Click any box in the flowchart below to open its details.**
 
 <div class="stack-map">
 
@@ -73,8 +76,8 @@ the two sides meet: it is the work of making a software stack actually exploit t
       <button type="button" class="stack-tile is-supporting" data-node="S1">Inference serving</button>
       <button type="button" class="stack-tile is-supporting" data-node="S2">High-performance kernels</button>
       <button type="button" class="stack-tile is-supporting" data-node="S3">Compiler design</button>
-      <button type="button" class="stack-tile" data-node="P5">Communication libraries</button>
-      <button type="button" class="stack-tile is-supporting" data-node="S4">OS &amp; drivers</button>
+      <button type="button" class="stack-tile" data-node="P5">System Software libraries</button>
+      <button type="button" class="stack-tile is-supporting" data-node="S4">Operating System</button>
     </div>
   </section>
 
@@ -149,7 +152,7 @@ the two sides meet: it is the work of making a software stack actually exploit t
 </div>
 
 <div class="focus-card" data-node="P5" style="--key:#2A6DB0">
-  Communication Libraries
+  System Software libraries
   <ul>
     <li><b>Collective libraries</b> — NCCL, RCCL, MPI: topology-aware algorithm selection</li>
     <li><b>Transfer abstraction</b> — NIXL, UCX: moving tensors across HBM, host memory, SSD, and the network behind one API</li>
@@ -221,7 +224,7 @@ the two sides meet: it is the work of making a software stack actually exploit t
 </div>
 
 <div class="focus-card" data-node="S4" style="--key:#6B6B66">
-  OS &amp; Drivers
+  Operating System
   <ul>
     <li>Process/thread scheduling, memory management, NUMA</li>
   </ul>
