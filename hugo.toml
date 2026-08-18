@@ -60,6 +60,11 @@ pagination.pagerSize = 10
 
 # Nav entries. `make new-section name=<x>` appends here automatically.
 [[menu.main]]
+  identifier = "research"
+  name = "Research"
+  url = "/research/"
+  weight = 10
+[[menu.main]]
   identifier = "news"
   name = "News"
   url = "/news/"

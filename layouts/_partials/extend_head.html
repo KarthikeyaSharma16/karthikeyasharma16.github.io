@@ -656,6 +656,26 @@
   .focus-details > summary:hover { color: var(--primary); }
   .focus-details > h3 { font-size: 1.1rem; margin: 1.25rem 0 0; }
 
+  /* Pointer to another page. Deliberately not a card — it sits among body
+     paragraphs, so it reads as a line of prose with an accent rule rather than
+     a UI panel interrupting the bio. Theme variables, so it follows dark mode. */
+  .callout {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    margin: 1.4rem 0;
+    padding-left: 0.9rem;
+    border-left: 3px solid #2A6DB0;
+    color: var(--secondary);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    text-decoration: none;
+  }
+  .callout b { color: var(--primary); font-weight: 600; }
+  .callout:hover b { text-decoration: underline; }
+  .callout svg { flex: none; color: #2A6DB0; transition: transform 0.15s ease; }
+  .callout:hover svg { transform: translateX(3px); }
+
   /* Legend for the diagram. Colour encodes one thing only — whether an area is
      a primary interest or a supporting one — so the key has just two entries. */
   .diagram-legend {
