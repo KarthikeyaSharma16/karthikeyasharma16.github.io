@@ -17,7 +17,7 @@ pagination.pagerSize = 10
   noClasses = false
 
 [params]
-  description = "MS ECE @ Georgia Tech — hardware-software co-design, reconfigurable computing, and EDA."
+  description = "Hardware Engineer @MangoBoost Inc."
   author = "Karthikeya Sharma"
   defaultTheme = "auto"
   ShowReadingTime = true
@@ -32,7 +32,7 @@ pagination.pagerSize = 10
   [params.profileMode]
     enabled = true
     title = "Karthikeya Sharma"
-    subtitle = "MS Computer Engineering, Georgia Institute of Technology"
+    subtitle = "Hardware Engineer"
     imageUrl = "img/profile.jpg"
     imageTitle = "Karthikeya Sharma"
     imageWidth = 200
