@@ -9,6 +9,17 @@ Also on [Google Scholar](https://scholar.google.com/citations?user=O4Tya_YAAAAJ&
 <div class="pub-list">
 
 <div class="pub">
+  <div class="pub-year">Aug 2026 (accepted)</div>
+  <div>
+    <div class="pub-title"> Embedded System Integration of a Resonant MEMS Gas Sensor </div>
+    <div class="pub-meta">
+      Hongyu Guo, Biya Haile, <span class="me">Karthikeya Sharma</span>, Wendell Hom, Durga Gajula, Brandon Casper, Callie Hao, Luke Beardslee<br>
+      <span class="venue">IEEE Sensors Journal</span> </a>
+    </div>
+  </div>
+</div>
+
+<div class="pub">
   <div class="pub-year">Oct 2025</div>
   <div>
     <div class="pub-title">Ultra-high Information-content Chemical Imaging with Broadband Coherent Anti-Stokes Raman and Two-photon Fluorescence Lifetime Microscopy</div>

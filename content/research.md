@@ -6,7 +6,7 @@ TocOpen: true
 ---
 
 ## Research Background
-My main background is in computer architecture, and more recently systems engineering. 
+My main background is in computer architecture, and more recently systems engineering. Below is an overview of the areas I have worked on across my academic research and industry roles:
 
 - **Computer Architecture**
   - CPU & GPU microarchitecture
@@ -15,11 +15,10 @@ My main background is in computer architecture, and more recently systems engine
     - Algorithm-to-hardware co-design and workload mapping
   - FPGA design
     - High-Level Synthesis
-- **Networking**
+- **Networking hardware architecture**
   - Shell & NIC design for programmable DPUs (BoostX VP1202, U45N)
 - **Systems Engineering**
-  - RDMA 
-  - NVMe-over-RDMA
+  - NVMe-over-RDMA Target
   - Network fabric offload — DPU and SmartNIC datapaths
   - Data Center Architecture (Rack-Scale infrastructure)
     - Reference Architectures such as NVIDIA HGX, STX etc.
@@ -34,36 +33,40 @@ My research interests cover (but are not limited to) the topics I list below:
   - CPU microarchitecture
   - Dataflow accelerators
     - Compiler and DSLs for custom accelerators
+    - Design-space exploration
+    - Algorithm-to-hardware co-design and workload mapping
   - Interconnects and fabrics (PCIe, CXL, NVLink/UALink etc)
   - Heterogenous computing
-- **Networking**
-  - NIC & DPU architecture
-  - CXL-NIC architecture
+- **Networking hardware architecture & fabric protocols**
+  - **Hardware Architecture**: NIC (PCIe-based, CXL-based), DPU
+  - **Fabric protocols**: Infiniband, RDMA (ROCEv2), NVMe-oF
+  - **Congestion and Routing**: Pack Spraying, Programmable Congestion Control 
 - **Systems Engineering**
-  - RDMA (RoCEv2), Infiniband
   - GPUDirect RDMA
   - NVMe-over-RDMA for Storage disaggregation
   - Network fabric offload — DPU and SmartNIC datapaths
   - KV-cache offloading & compression
+  - Context Memory Storage (based on NVIDIA CMX using BF-4 DPUs)
 - **System Software**
   - Collective communication libraries (NCCL, MSCCL) and transfer libraries (NIXL)
-  - Inference serving and KV-cache management (vLLM, LMCache)
+  - KV-cache management (LMCache)
 
 ## Research Vision
 
-As AI infrastructure scales to support agentic workloads, performance is constrained by full-system optimization: from the software stack down to the network fabric and the system's ability to handle on-the-fly data processing as workloads scale out. My research would focus on answering three key questions:
+As AI rapidly evolves to support agentic workloads, full-system optimization has become crucial to performance of rack-scale data center infrastructure. Traditional inference for chatbot applications assumed predictable I/O and short, fixed prompts. However, modern agentic workloads involve dynamic sequences, tool calling, and context windows expanding up to million tokens. Recent industry developments are driving tight synergy of compute, storage and networking infrastructure. For instance, NVIDIA’s Vera Rubin NVL72 uses a dedicated CMX storage tier, leveraging BlueField-4 DPUs to accelerate context memory storage. Meanwhile, AMD’s Helios rack-scale architecture uniquely leverages low-latency Ultra Accelerator Link over Ethernet (UALoE) open-standard for inter-GPU scale-up as an alternative to NVLink. From my observation, tight synergy is achieved through a holistic approach from the software stack down to the hardware: 
 
-1. How should data move between accelerators, hosts, and storage once a model outgrows a single node?
-2. What belongs on the network fabric — the DPU, the SmartNIC, the interconnect — and what belongs in the software stack above it?
-3. What do serving frameworks and communication libraries have to change to use those fabrics well?
+- Optimizing CPU-GPU interconnects (e.g., NVLink C2C), topology-aware inter-GPU scale-up fabrics (e.g., NVLink, UALoE) and high-speed interface standards (e.g., PCIe and CXL).
+- Sustaining line-rate (e.g., 800 Gbps or more) “on-the-fly” data processing across scale-out network fabrics (e.g., Ethernet or InfiniBand) to handle RoCEv2, disaggregated storage traffic (e.g., KV cache for agentic long-term memory).
+- Developing system software that exposes fine-grained hardware control, allowing distributed inference serving to seamlessly orchestrate the underlying network and interconnect fabrics. 
 
 ## How These Fit Together
 
 The diagram below summarizes my view of the software and hardware ecosystem — my **primary** interest
-areas and **secondary / supporting** ones. Systems engineering sits in the middle because that is where
-the two sides meet: it is the work of making a software stack actually exploit the hardware beneath it.
+areas and **secondary / supporting** ones. 
 
-**Click any box in the flowchart below to open its details.**
+Systems engineering sits in the middle because it is fundamentally bidirectional: the software stack must be optimized to fully exploit the hardware beneath it, while architecting the hardware to better serve the applications above it.
+
+> **Click any box in the flowchart below to open its details.**
 
 <div class="stack-map">
 
@@ -71,10 +74,12 @@ the two sides meet: it is the work of making a software stack actually exploit t
     <h4 class="stack-col-title">Software stack</h4>
     <div class="stack-flow">
       <button type="button" class="stack-tile is-supporting" data-node="S1">Inference serving</button>
-      <button type="button" class="stack-tile is-supporting" data-node="S2">High-performance kernels</button>
       <button type="button" class="stack-tile is-supporting" data-node="S3">Compiler design</button>
-      <button type="button" class="stack-tile" data-node="P5">Communication libraries</button>
-      <button type="button" class="stack-tile is-supporting" data-node="S4">OS &amp; drivers</button>
+      <div class="stack-pair">
+        <button type="button" class="stack-tile is-supporting" data-node="S2">High-performance kernels</button>
+        <button type="button" class="stack-tile" data-node="P5">System Software libraries</button>
+      </div>
+      <button type="button" class="stack-tile is-supporting" data-node="S4">Operating System</button>
     </div>
   </section>
 
@@ -149,7 +154,7 @@ the two sides meet: it is the work of making a software stack actually exploit t
 </div>
 
 <div class="focus-card" data-node="P5" style="--key:#2A6DB0">
-  Communication Libraries
+  System Software libraries
   <ul>
     <li><b>Collective libraries</b> — NCCL, RCCL, MPI: topology-aware algorithm selection</li>
     <li><b>Transfer abstraction</b> — NIXL, UCX: moving tensors across HBM, host memory, SSD, and the network behind one API</li>
@@ -221,7 +226,7 @@ the two sides meet: it is the work of making a software stack actually exploit t
 </div>
 
 <div class="focus-card" data-node="S4" style="--key:#6B6B66">
-  OS &amp; Drivers
+  Operating System
   <ul>
     <li>Process/thread scheduling, memory management, NUMA</li>
   </ul>
