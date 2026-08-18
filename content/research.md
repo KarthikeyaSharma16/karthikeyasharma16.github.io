@@ -74,9 +74,11 @@ Systems engineering sits in the middle because it is fundamentally bidirectional
     <h4 class="stack-col-title">Software stack</h4>
     <div class="stack-flow">
       <button type="button" class="stack-tile is-supporting" data-node="S1">Inference serving</button>
-      <button type="button" class="stack-tile is-supporting" data-node="S2">High-performance kernels</button>
       <button type="button" class="stack-tile is-supporting" data-node="S3">Compiler design</button>
-      <button type="button" class="stack-tile" data-node="P5">System Software libraries</button>
+      <div class="stack-pair">
+        <button type="button" class="stack-tile is-supporting" data-node="S2">High-performance kernels</button>
+        <button type="button" class="stack-tile" data-node="P5">System Software libraries</button>
+      </div>
       <button type="button" class="stack-tile is-supporting" data-node="S4">Operating System</button>
     </div>
   </section>
