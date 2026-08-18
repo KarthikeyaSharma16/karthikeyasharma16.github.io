@@ -5,7 +5,11 @@ showToc: false
 aliases: ["/about/"]
 ---
 
-Hi 👋! I am a Hardware Engineer at MangoBoost, Inc., working on DPU system architecture and GPU-server workload analysis. What I care about is how machines are wired together and what that costs the workload running on them: the interconnects and fabrics — PCIe, CXL, RoCEv2 — the programmable devices that sit on them, and the system stack that has to make all of it usable. My day-to-day is the full path from an application workload down to the silicon that runs it, and most of it lives in making that path scale: across the network with RDMA and NVMe-over-RDMA for I/O acceleration and storage disaggregation, and within a node through prefetch, offload, and hardware-software co-design.
+Hi 👋!
+
+I am a Hardware Engineer at **[MangoBoost, Inc.](https://www.mangoboost.io/)**, where I work on scaling data center infrastructure — DPU system architecture and GPU-server workload analysis.
+
+My work follows a single path: an application workload down to the silicon that runs it. Most of it is spent making that path scale — across the network with RDMA and NVMe-over-RDMA for I/O acceleration and storage disaggregation, and within a node through prefetch, offload, and hardware-software co-design.
 
 Before that, I was a graduate student pursuing an MS in the Department of Electrical and Computer Engineering by research under the supervision of **[Prof. Callie Hao](https://sites.gatech.edu/ece-callie/)** at Georgia Tech's **[SHARC Lab](https://sharclab.ece.gatech.edu)**.
 
@@ -13,64 +17,90 @@ In addition to my academic pursuits, I enjoy playing games, watching Formula 1, 
 
 ## Research Interests
 
-My **primary** interests are interconnects and fabrics (PCIe, CXL), DPU architecture, systems engineering, and computer architecture — CPU and GPU microarchitecture together with the hardware design that realizes it. The **supporting** areas below are the ones I lean on to get there: the inference stack — the serving framework, the compiler that lowers it, and the kernels it ends up running — defines the workload, the OS and drivers decide how that workload reaches the hardware, and accelerator and reconfigurable design is where it lands.
+My **primary** interests are systems engineering, computer architecture (DPU, CPU, GPU microarchitecture) and interconnects & fabrics (PCIe, CXL etc). The following diagram summarizes my view of the software and hardware ecosystem, my **primary** interest areas and **secondary / supporting** areas.
 
 ```mermaid
 flowchart TD
     subgraph SW[" Workload &amp; software stack "]
     direction TB
         S1["`**Inference serving**
-        vLLM · continuous batching · PagedAttention`"]
+        vLLM · batching · PagedAttention`"]
         S3["`**Compiler design**
         IR · passes · codegen · auto-vectorization`"]
         S2["`**High-performance kernels**
         CUDA · AVX/SIMD · memory coalescing`"]
+        P5["`**Communication libraries**
+        Collectives (NCCL) · transfers (NIXL / UCX) · MPI`"]
         S4["`**OS & drivers**
-        Scheduling · memory management · drivers · NUMA`"]
+        Scheduling · memory management · NUMA`"]
 
         S1 --> S3
         S3 --> S2
-        S2 --> S4
+        S2 --> P5
+        P5 --> S4
     end
 
-    subgraph HW[" Hardware &amp; fabric "]
+    subgraph HW[" Hardware "]
     direction TB
-        P1["`**Interconnects & fabrics**
-        PCIe · CXL · NVLink / NVLink-C2C · UALink · RoCEv2`"]
-        P2["`**DPU architecture**
-        RDMA offload · SmartNIC datapath · storage acceleration`"]
-        S5["`**ASIC / NPU & reconfigurable**
-        Domain-specific accelerators · FPGA · CGRA`"]
-        P4["`**Computer architecture**
-        CPU & GPU microarchitecture · HLS & RTL design`"]
+        subgraph ARCH[" Architecture paradigms "]
+        direction LR
+            H1["`**CPU**`"]
+            H2["`**GPU**`"]
+            H3["`**FPGA**`"]
+            H4["`**Custom ASIC**
+            Domain-specific
+            accelerators · dataflow`"]
 
-        P1 --> P2
-        P2 --> P4
-        S5 --> P4
+            %% Invisible links: Mermaid ignores a subgraph's `direction` once the
+            %% subgraph has edges crossing its boundary, so without these the four
+            %% paradigms stack in a single column. Two separate chains lay them
+            %% out as a 2x2 grid.
+            H1 ~~~ H2
+            H3 ~~~ H4
+        end
+
+        P2["`**DPU — network fabric**
+        RDMA offload
+        SmartNIC datapath`"]
+
+        P1["`**Interconnects**
+        PCIe · CXL · NVLink
+        UALink · RoCEv2`"]
+
+        ARCH --> P2
+        ARCH --> P1
     end
 
     P3["`**Systems engineering**
-    Storage disaggregation · KV-cache offload · prefetch · scheduling`"]
+    Storage disaggregation · KV-cache offload · prefetch`"]
 
+    HW --> P3
     S4 --> P3
-    P4 --> P3
 
-    style P1 fill:#534AB7,stroke:#3C3489,color:#EDECFB,stroke-width:3px
-    style P2 fill:#993C1D,stroke:#712B13,color:#FBEAE3,stroke-width:3px
-    style P3 fill:#0F6E56,stroke:#085041,color:#E2F6EE,stroke-width:3px
-    style P4 fill:#185FA5,stroke:#0C447C,color:#E4F0FC,stroke-width:3px
+    style P1 fill:#DCEAF8,stroke:#2A6DB0,color:#123A5E,stroke-width:2px
+    style P2 fill:#DCEAF8,stroke:#2A6DB0,color:#123A5E,stroke-width:2px
+    style P3 fill:#DCEAF8,stroke:#2A6DB0,color:#123A5E,stroke-width:2px
+    style P5 fill:#DCEAF8,stroke:#2A6DB0,color:#123A5E,stroke-width:2px
+    style H1 fill:#DCEAF8,stroke:#2A6DB0,color:#123A5E,stroke-width:2px,stroke-dasharray:5 3
+    style H2 fill:#F5F5F3,stroke:#A9A9A4,color:#4A4A47,stroke-dasharray:4 3
+    style H3 fill:#DCEAF8,stroke:#2A6DB0,color:#123A5E,stroke-width:2px,stroke-dasharray:5 3
+    style H4 fill:#DCEAF8,stroke:#2A6DB0,color:#123A5E,stroke-width:2px,stroke-dasharray:5 3
 
-    style S1 fill:#F4F4F2,stroke:#9B9B97,color:#4A4A47,stroke-dasharray:4 3
-    style S2 fill:#F4F4F2,stroke:#9B9B97,color:#4A4A47,stroke-dasharray:4 3
-    style S3 fill:#F4F4F2,stroke:#9B9B97,color:#4A4A47,stroke-dasharray:4 3
-    style S4 fill:#F4F4F2,stroke:#9B9B97,color:#4A4A47,stroke-dasharray:4 3
-    style S5 fill:#F4F4F2,stroke:#9B9B97,color:#4A4A47,stroke-dasharray:4 3
+    style S1 fill:#F5F5F3,stroke:#A9A9A4,color:#4A4A47,stroke-dasharray:4 3
+    style S2 fill:#F5F5F3,stroke:#A9A9A4,color:#4A4A47,stroke-dasharray:4 3
+    style S3 fill:#F5F5F3,stroke:#A9A9A4,color:#4A4A47,stroke-dasharray:4 3
+    style S4 fill:#F5F5F3,stroke:#A9A9A4,color:#4A4A47,stroke-dasharray:4 3
 
-    style SW fill:none,stroke:#B0B0AC,color:#8A8F98
-    style HW fill:none,stroke:#B0B0AC,color:#8A8F98
+    style SW fill:#FBFBFA,stroke:#C9C9C4,color:#8A8F98
+    style ARCH fill:#EFF5FB,stroke:#9EC0E0,color:#3F6C97
+    style HW fill:#FBFBFA,stroke:#C9C9C4,color:#8A8F98
 ```
 
-<p class="diagram-hint">Solid boxes are primary interests, dashed are supporting. Click any box to open its details.</p>
+<p class="diagram-legend">
+  <span class="legend-item"><span class="legend-swatch legend-primary"></span>Primary interest</span>
+  <span class="legend-item"><span class="legend-swatch legend-supporting"></span>Supporting area</span>
+  <span class="legend-note">Click any box to open its details.</span>
+</p>
 
 <details class="focus-details">
 <summary>Browse all focus areas as a list</summary>
@@ -79,8 +109,8 @@ flowchart TD
 
 <div class="focus-grid">
 
-<div class="focus-card" data-node="P1" style="--key:#534AB7">
-  <h4>Interconnects &amp; Fabrics</h4>
+<div class="focus-card" data-node="P1" style="--key:#2A6DB0">
+  <h4>Interconnects</h4>
   <ul>
     <li><b>PCIe</b> — Gen5/Gen6 links, DMA engines, endpoint and root-complex behavior</li>
     <li><b>CXL</b> — memory expansion and pooling, type-2/type-3 devices, coherence</li>
@@ -89,8 +119,8 @@ flowchart TD
   </ul>
 </div>
 
-<div class="focus-card" data-node="P2" style="--key:#993C1D">
-  <h4>DPU Architecture</h4>
+<div class="focus-card" data-node="P2" style="--key:#2A6DB0">
+  <h4>DPU — Network Fabric</h4>
   <ul>
     <li>RDMA offload and networking datapath design</li>
     <li>SmartNIC programmability — what belongs on the device vs. the host</li>
@@ -98,7 +128,7 @@ flowchart TD
   </ul>
 </div>
 
-<div class="focus-card" data-node="P3" style="--key:#0F6E56">
+<div class="focus-card" data-node="P3" style="--key:#2A6DB0">
   <h4>Systems Engineering</h4>
   <ul>
     <li><b>Across the network</b> — storage disaggregation, KV-cache offload, model offload to SSDs</li>
@@ -107,13 +137,39 @@ flowchart TD
   </ul>
 </div>
 
-<div class="focus-card" data-node="P4" style="--key:#185FA5">
-  <h4>Computer Architecture</h4>
+<div class="focus-card" data-node="P5" style="--key:#2A6DB0">
+  <h4>Communication &amp; Data-Movement Libraries</h4>
   <ul>
-    <li><b>CPU</b> — pipeline, cache hierarchy, branch prediction, NUMA effects</li>
-    <li><b>GPU</b> — SM, tensor cores, HBM, NVLink and PCIe attachment</li>
-    <li><b>Hardware design</b> — HLS, C-to-RTL, Verilog/SystemVerilog, timing closure</li>
-    <li>Hardware-software co-design and interconnection network optimization</li>
+    <li><b>Collective libraries</b> — NCCL, RCCL, oneCCL, MPI: all-reduce and all-gather, topology-aware algorithm selection</li>
+    <li><b>Transfer abstraction</b> — NIXL, UCX: moving tensors across HBM, host memory, SSD, and the network behind one API</li>
+    <li>Where the fabric surfaces in software — how these calls map onto NVLink, PCIe, and RDMA decides whether the interconnect is actually used well</li>
+  </ul>
+</div>
+
+<div class="focus-card" data-node="H1" style="--key:#2A6DB0">
+  <h4>CPU</h4>
+  <ul>
+    <li>Pipeline, cache hierarchy, branch prediction, memory ordering</li>
+    <li>NUMA effects and cache-aware data layout</li>
+    <li>AVX/SIMD vectorization for dense compute</li>
+  </ul>
+</div>
+
+<div class="focus-card" data-node="H3" style="--key:#2A6DB0">
+  <h4>FPGA</h4>
+  <ul>
+    <li><b>Design flow</b> — HLS, C-to-RTL, Verilog/SystemVerilog</li>
+    <li><b>Implementation</b> — routing, placement, timing closure</li>
+    <li><b>Reconfigurable fabric</b> — CGRA interconnects, dynamic partial reconfiguration</li>
+  </ul>
+</div>
+
+<div class="focus-card" data-node="H4" style="--key:#2A6DB0">
+  <h4>Custom ASIC</h4>
+  <ul>
+    <li>Domain-specific accelerators — sparse and dense dataflow design</li>
+    <li>Algorithm-to-hardware co-design and workload mapping</li>
+    <li>Design-space exploration from a verified software model</li>
   </ul>
 </div>
 
@@ -122,6 +178,15 @@ flowchart TD
 <h3>Supporting Areas</h3>
 
 <div class="focus-grid">
+
+<div class="focus-card" data-node="H2" style="--key:#6B6B66">
+  <h4>GPU</h4>
+  <ul>
+    <li>SM design, tensor cores, warp scheduling, occupancy</li>
+    <li>HBM bandwidth and the memory hierarchy behind it</li>
+    <li>Host attachment over PCIe, scale-up over NVLink</li>
+  </ul>
+</div>
 
 <div class="focus-card" data-node="S1" style="--key:#6B6B66">
   <h4>Inference Serving</h4>
@@ -153,15 +218,6 @@ flowchart TD
   <ul>
     <li>Process/thread scheduling, memory management, NUMA</li>
     <li>Device drivers — the seam between the fabric and the software stack</li>
-  </ul>
-</div>
-
-<div class="focus-card" data-node="S5" style="--key:#6B6B66">
-  <h4>ASIC / NPU &amp; Reconfigurable</h4>
-  <ul>
-    <li><b>Domain-specific accelerators</b> — sparse and dense dataflow design</li>
-    <li><b>FPGA</b> — routing, placement, and timing optimization</li>
-    <li><b>CGRA</b> — reconfigurable interconnects, dynamic partial reconfiguration</li>
   </ul>
 </div>
 

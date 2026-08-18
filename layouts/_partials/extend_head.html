@@ -249,19 +249,6 @@
   a.pill { text-decoration: none; }
   a.pill:hover { color: var(--primary); border-color: var(--secondary); }
 
-  /* Home page. PaperMod sizes the profile block to fill the viewport, which is
-     right when it is the whole page — but the About text now sits directly
-     beneath it, so it becomes a compact header instead. */
-  .main .home-hero .profile {
-    min-height: auto;
-    padding: 1.5rem 0 2rem;
-  }
-
-  .home-about {
-    border-top: 1px solid var(--border);
-    padding-top: 1.5rem;
-  }
-
   /* News archive (/news/). Rows that link to a write-up carry a "Read" marker;
      one-line announcements render inline and are not clickable. */
   .news-feed { display: grid; gap: 0.4rem; margin: 1.25rem 0 2rem; }
@@ -403,7 +390,7 @@
     markdownAutoWrap: false,
     themeVariables: {
       fontFamily: "Inter, system-ui, sans-serif",
-      fontSize: "14px",
+      fontSize: "16px",
       lineColor: "#8A8F98",
       primaryTextColor: "#8A8F98",
     },
@@ -416,12 +403,17 @@
       wrappingWidth: 560,
       htmlLabels: true,
       padding: 14,
-      nodeSpacing: 45,
-      rankSpacing: 40,
+      nodeSpacing: 30,
+      rankSpacing: 24,
     },
   });
 
   await mermaid.run({ querySelector: "pre.mermaid" });
+
+  for (const marker of document.querySelectorAll("pre.mermaid svg marker")) {
+    marker.setAttribute("markerWidth", "14");
+    marker.setAttribute("markerHeight", "14");
+  }
 
   /* Diagram nodes reveal the matching focus card in a panel beside the diagram.
      The pairing is a node id in the flowchart (P1, S3, …) and `data-node` on a
@@ -546,6 +538,17 @@
     overflow-x: auto;
   }
   pre.mermaid:not([data-processed="true"]) { visibility: hidden; }
+  pre.mermaid svg .flowchart-link {
+    stroke: var(--primary) !important;
+    stroke-width: 1.8px !important;
+    opacity: 0.85;
+  }
+  pre.mermaid svg .marker,
+  pre.mermaid svg .arrowMarkerPath {
+    fill: var(--primary) !important;
+    stroke: var(--primary) !important;
+  }
+
   /* Let the diagram shrink to fit its column, but keep Mermaid's own inline
      max-width as the ceiling — forcing width:100% blows the labels up well past
      their intended size when the row is wider than the natural layout. */
@@ -653,11 +656,31 @@
   .focus-details > summary:hover { color: var(--primary); }
   .focus-details > h3 { font-size: 1.1rem; margin: 1.25rem 0 0; }
 
-  .diagram-hint {
+  /* Legend for the diagram. Colour encodes one thing only — whether an area is
+     a primary interest or a supporting one — so the key has just two entries. */
+  .diagram-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem 1.1rem;
     margin: -0.75rem 0 1.5rem;
-    text-align: center;
     font-size: 0.8rem;
     color: var(--secondary);
   }
+  .legend-item { display: inline-flex; align-items: center; gap: 0.4rem; }
+
+  .legend-swatch {
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 3px;
+    flex: none;
+  }
+  .legend-primary { background: #DCEAF8; border: 1px solid #2A6DB0; }
+  .legend-supporting {
+    background: #F5F5F3;
+    border: 1px dashed #A9A9A4;
+  }
+  .legend-note { font-style: italic; opacity: 0.85; }
 </style>
 {{ end }}
