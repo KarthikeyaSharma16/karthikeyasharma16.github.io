@@ -10,6 +10,18 @@
     padding: 2.5rem 0 1.5rem;
   }
 
+  /* PaperMod caps the profile buttons at 400px, which wraps the fourth one onto
+     its own row. Let the row size to its contents instead, and only wrap when
+     the screen genuinely cannot fit them. */
+  .main .profile .buttons {
+    max-width: none;
+    flex-wrap: nowrap;
+  }
+
+  @media (max-width: 560px) {
+    .main .profile .buttons { flex-wrap: wrap; max-width: 22rem; }
+  }
+
   .home-about {
     border-top: 1px solid var(--border);
     padding-top: 1.75rem;

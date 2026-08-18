@@ -39,11 +39,17 @@ pagination.pagerSize = 10
     imageHeight = 200
 
     [[params.profileMode.buttons]]
-      name = "CV"
-      url = "cv"
+      name = "Research"
+      url = "research"
+    [[params.profileMode.buttons]]
+      name = "News"
+      url = "news"
     [[params.profileMode.buttons]]
       name = "Publications"
       url = "publications"
+    [[params.profileMode.buttons]]
+      name = "CV"
+      url = "cv"
 
   [[params.socialIcons]]
     name = "github"
