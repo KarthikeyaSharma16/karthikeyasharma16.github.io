@@ -59,82 +59,54 @@ As AI infrastructure scales to support agentic workloads, performance is constra
 
 ## How These Fit Together
 
-The diagram below summarizes my view of the software and hardware ecosystem, my **primary** interest areas and **secondary / supporting** areas.
+The diagram below summarizes my view of the software and hardware ecosystem — my **primary** interest
+areas and **secondary / supporting** ones. Systems engineering sits in the middle because that is where
+the two sides meet: it is the work of making a software stack actually exploit the hardware beneath it.
 
 **Click any box in the flowchart below to open its details.**
 
-```mermaid
-flowchart TD
-    subgraph SW[" Workload &amp; software stack "]
-    direction TB
-        S1["`**Inference serving**`"]
-        S3["`**Compiler design**
-        (Codegen, IR optimization)`"]
-        S2["`**High-Performance Kernels for AI operators** 
-        (CUDA kernels, DSLs)`"]
-        P5["`**Communication libraries**
-        (Collectives Communication (NCCL, MSCCL), transfers (NIXL), MPI)`"]
-        S4["`**OS & drivers**
-        (Scheduling, memory management, NUMA)`"]
+<div class="stack-map">
 
-        S1 --> S2
-        S2 --> S3
-        S3 --> P5
-        P5 --> S4
-    end
+  <section class="stack-col">
+    <h4 class="stack-col-title">Software stack</h4>
+    <div class="stack-flow">
+      <button type="button" class="stack-tile is-supporting" data-node="S1">Inference serving</button>
+      <button type="button" class="stack-tile is-supporting" data-node="S2">High-performance kernels</button>
+      <button type="button" class="stack-tile is-supporting" data-node="S3">Compiler design</button>
+      <button type="button" class="stack-tile" data-node="P5">Communication libraries</button>
+      <button type="button" class="stack-tile is-supporting" data-node="S4">OS &amp; drivers</button>
+    </div>
+  </section>
 
-    subgraph HW[" Hardware "]
-    direction TB
-        subgraph ARCH[" Architecture paradigms "]
-        direction LR
-            H1["`**CPU**`"]
-            H2["`**GPU**`"]
-            H3["`**FPGA**`"]
-            H4["`**Custom ASIC**
-            (Domain-specific dataflow accelerators)`"]
+  <div class="stack-bridge">
+    <span class="bridge-arm bridge-arm--left" aria-hidden="true"></span>
+    <span class="bridge-arm bridge-arm--right" aria-hidden="true"></span>
+    <button type="button" class="stack-tile" data-node="P3">
+      Systems engineering
+      <span class="stack-tile-note">connects the software stack to the hardware</span>
+    </button>
+  </div>
 
-            %% Invisible links: Mermaid ignores a subgraph's `direction` once the
-            %% subgraph has edges crossing its boundary, so without these the four
-            %% paradigms stack in a single column. Two separate chains lay them
-            %% out as a 2x2 grid.
-            H1 ~~~ H2
-            H3 ~~~ H4
-        end
+  <section class="stack-col">
+    <h4 class="stack-col-title">Hardware</h4>
+    <div class="stack-flow">
+      <div class="stack-group">
+        <span class="stack-group-title">Architecture paradigms</span>
+        <div class="stack-quad">
+          <button type="button" class="stack-tile" data-node="H1">CPU</button>
+          <button type="button" class="stack-tile is-supporting" data-node="H2">GPU</button>
+          <button type="button" class="stack-tile" data-node="H3">FPGA</button>
+          <button type="button" class="stack-tile" data-node="H4">Custom ASIC</button>
+        </div>
+      </div>
+      <div class="stack-pair">
+        <button type="button" class="stack-tile" data-node="P2">Network fabric</button>
+        <button type="button" class="stack-tile" data-node="P1">Interconnects</button>
+      </div>
+    </div>
+  </section>
 
-        P2["`**Network fabric**
-        (DPU, SmartNIC)`"]
-
-        P1["`**Interconnects**
-        (PCIe, CXL, NVLink)`"]
-
-        ARCH --> P2
-        ARCH --> P1
-    end
-
-    P3["`**Systems engineering**
-    (Storage disaggregation, KV-cache offloading, KV Cache compression, NVMe-oF over RDMA, ROCEv2, NTI)`"]
-
-    HW --> P3
-    S4 --> P3
-
-    style P1 fill:#DCEAF8,stroke:#2A6DB0,color:#123A5E,stroke-width:2px
-    style P2 fill:#DCEAF8,stroke:#2A6DB0,color:#123A5E,stroke-width:2px
-    style P3 fill:#DCEAF8,stroke:#2A6DB0,color:#123A5E,stroke-width:2px
-    style P5 fill:#DCEAF8,stroke:#2A6DB0,color:#123A5E,stroke-width:2px
-    style H1 fill:#DCEAF8,stroke:#2A6DB0,color:#123A5E,stroke-width:2px,stroke-dasharray:5 3
-    style H2 fill:#F5F5F3,stroke:#A9A9A4,color:#4A4A47,stroke-dasharray:4 3
-    style H3 fill:#DCEAF8,stroke:#2A6DB0,color:#123A5E,stroke-width:2px,stroke-dasharray:5 3
-    style H4 fill:#DCEAF8,stroke:#2A6DB0,color:#123A5E,stroke-width:2px,stroke-dasharray:5 3
-
-    style S1 fill:#F5F5F3,stroke:#A9A9A4,color:#4A4A47,stroke-dasharray:4 3
-    style S2 fill:#F5F5F3,stroke:#A9A9A4,color:#4A4A47,stroke-dasharray:4 3
-    style S3 fill:#F5F5F3,stroke:#A9A9A4,color:#4A4A47,stroke-dasharray:4 3
-    style S4 fill:#F5F5F3,stroke:#A9A9A4,color:#4A4A47,stroke-dasharray:4 3
-
-    style SW fill:#FBFBFA,stroke:#C9C9C4,color:#8A8F98
-    style ARCH fill:#EFF5FB,stroke:#9EC0E0,color:#3F6C97
-    style HW fill:#FBFBFA,stroke:#C9C9C4,color:#8A8F98
-```
+</div>
 
 <p class="diagram-legend">
   <span class="legend-item"><span class="legend-swatch legend-primary"></span>Primary interest</span>

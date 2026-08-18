@@ -372,63 +372,21 @@
      by layout/kind — so every page shares one footer and per-page checks fail there. */}}
 {{/* Not gated on .IsPage: the home page is kind "home", not "page", and it
      carries the About content (including this diagram). */}}
-{{ if in .RawContent "```mermaid" }}
+{{ if in .RawContent "stack-map" }}
 <script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
-
-  // Nodes carry their own fill/stroke/color, so only the connective tissue
-  // (edges, arrowheads, labels) has to survive the light/dark toggle.
-  mermaid.initialize({
-    // Rendering is driven manually below so the node click handlers can be
-    // attached once the SVG exists.
-    startOnLoad: false,
-    securityLevel: "loose",
-    theme: "base",
-    // The diagram sits inside a <pre>, so an inherited font family resolves to the
-    // code face; name the body face explicitly. Auto-wrap must stay off or Mermaid
-    // re-wraps markdown labels past the node box and clips them.
-    markdownAutoWrap: false,
-    themeVariables: {
-      fontFamily: "Inter, system-ui, sans-serif",
-      fontSize: "16px",
-      lineColor: "#8A8F98",
-      primaryTextColor: "#8A8F98",
-    },
-    // Default wrappingWidth is narrow enough to break labels mid-word. The
-    // padding/spacing values widen the boxes and tighten the gaps between
-    // ranks, so the chart reads as a compact block rather than sparse rows.
-    flowchart: {
-      curve: "basis",
-      useMaxWidth: true,
-      wrappingWidth: 560,
-      htmlLabels: true,
-      padding: 14,
-      nodeSpacing: 30,
-      rankSpacing: 24,
-    },
-  });
-
-  await mermaid.run({ querySelector: "pre.mermaid" });
-
-  for (const marker of document.querySelectorAll("pre.mermaid svg marker")) {
-    marker.setAttribute("markerWidth", "14");
-    marker.setAttribute("markerHeight", "14");
-  }
-
-  /* Diagram nodes reveal the matching focus card in a panel beside the diagram.
-     The pairing is a node id in the flowchart (P1, S3, …) and `data-node` on a
-     card; a node with no card stays inert. The card in the grid is the single
-     source of truth — the panel clones it, so the content never has to be
-     written twice, and the grid keeps working when this script does not run. */
+  /* Tiles in the stack map reveal the matching focus card in a panel beside the
+     diagram. The pairing is `data-node` on a tile and the same value on a card;
+     a tile with no card stays inert. The card is the single source of truth —
+     the panel clones it, so nothing is written twice, and the card list keeps
+     working when this script does not run. */
   const cards = new Map(
     [...document.querySelectorAll(".focus-card[data-node]")].map((c) => [c.dataset.node, c])
   );
-  const diagram = document.querySelector("pre.mermaid");
+  const diagram = document.querySelector(".stack-map");
 
   if (cards.size && diagram) {
-    // The diagram and the panel share a row, so the panel opens alongside the
-    // flowchart rather than over the page. Wrapping happens here to keep the
-    // markdown source a plain code fence.
+    // Diagram and panel share a row, so details open alongside the map rather
+    // than over the page.
     const row = document.createElement("div");
     row.className = "diagram-row";
     diagram.replaceWith(row);
@@ -447,40 +405,24 @@
 
     const close = () => {
       panel.hidden = true;
-      panel.style.marginTop = "";
       row.classList.remove("has-panel");
       current?.classList.remove("is-selected");
+      current?.setAttribute("aria-expanded", "false");
       current = null;
     };
 
-    const open = (card, node) => {
-      if (current === node) return close(); // clicking the open node again closes it
+    const open = (card, tile) => {
+      if (current === tile) return close(); // clicking the open tile closes it
       current?.classList.remove("is-selected");
+      current?.setAttribute("aria-expanded", "false");
       body.innerHTML = card.innerHTML;
-      // --key is an inline style on the card, so read it straight off the
-      // attribute rather than resolving the whole computed style.
+      // --key is an inline style on the card, so read it off the attribute.
       body.style.setProperty("--key", card.style.getPropertyValue("--key"));
-      node.classList.add("is-selected");
-      current = node;
+      tile.classList.add("is-selected");
+      tile.setAttribute("aria-expanded", "true");
+      current = tile;
       panel.hidden = false;
       row.classList.add("has-panel");
-
-      /* Sit the panel next to the box that was clicked rather than pinned to
-         the top, so a node low in the diagram does not leave a void above it.
-         Measured after the row has widened, and clamped so the panel never
-         hangs past the bottom of the diagram. Below the stacking breakpoint the
-         panel sits under the diagram, where an offset would only open a gap. */
-      requestAnimationFrame(() => {
-        if (window.matchMedia("(max-width: 900px)").matches) {
-          panel.style.marginTop = "";
-          return;
-        }
-        const rowTop = row.getBoundingClientRect().top;
-        const nodeTop = node.getBoundingClientRect().top;
-        const room = row.clientHeight - panel.offsetHeight;
-        const offset = Math.max(0, Math.min(nodeTop - rowTop, room));
-        panel.style.marginTop = `${offset}px`;
-      });
     };
 
     panel.querySelector(".focus-panel-close").addEventListener("click", () => {
@@ -496,73 +438,23 @@
       }
     });
 
-    for (const node of diagram.querySelectorAll("g.node")) {
-      // Mermaid prefixes node ids with the generated diagram id, so the shape is
-      // "<diagram>-flowchart-<key>-<n>" — match the tail, not the whole string.
-      const key = node.id.match(/flowchart-(.+)-\d+$/)?.[1];
-      const card = key && cards.get(key);
-      if (!card) continue;
-
-      node.classList.add("is-clickable");
-      node.setAttribute("role", "button");
-      node.setAttribute("tabindex", "0");
-      node.setAttribute("aria-expanded", "false");
-      node.setAttribute("aria-label", card.querySelector("h4")?.textContent ?? key);
-
-      node.addEventListener("click", () => open(card, node));
-      node.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          open(card, node);
-        }
-      });
-    }
-
-    // Keep aria-expanded in step with the selected node.
-    const sync = () => {
-      for (const node of diagram.querySelectorAll("g.node.is-clickable")) {
-        node.setAttribute("aria-expanded", String(node === current));
+    for (const tile of diagram.querySelectorAll(".stack-tile[data-node]")) {
+      const card = cards.get(tile.dataset.node);
+      if (!card) {
+        tile.disabled = true;
+        continue;
       }
-    };
-    row.addEventListener("click", sync);
-    row.addEventListener("keyup", sync);
+      tile.setAttribute("aria-expanded", "false");
+      tile.addEventListener("click", () => open(card, tile));
+    }
   }
 </script>
 <style>
-  pre.mermaid {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 1.5rem 0;
-    text-align: center;
-    overflow-x: auto;
-  }
-  pre.mermaid:not([data-processed="true"]) { visibility: hidden; }
-  pre.mermaid svg .flowchart-link {
-    stroke: var(--primary) !important;
-    stroke-width: 1.8px !important;
-    opacity: 0.85;
-  }
   pre.mermaid svg .marker,
-  pre.mermaid svg .arrowMarkerPath {
-    fill: var(--primary) !important;
-    stroke: var(--primary) !important;
-  }
 
   /* Let the diagram shrink to fit its column, but keep Mermaid's own inline
      max-width as the ceiling — forcing width:100% blows the labels up well past
      their intended size when the row is wider than the natural layout. */
-  pre.mermaid svg { max-width: 100%; height: auto; }
-
-  /* Nodes that have a focus card behind them. */
-  pre.mermaid g.node.is-clickable { cursor: pointer; }
-  pre.mermaid g.node.is-clickable rect { transition: filter 0.15s ease; }
-  pre.mermaid g.node.is-clickable:hover rect { filter: brightness(1.12); }
-  pre.mermaid g.node.is-clickable:focus-visible { outline: none; }
-  pre.mermaid g.node.is-clickable:focus-visible rect {
-    stroke: var(--primary);
-    stroke-width: 3px;
-  }
 
   /* Diagram and detail panel share a row; the panel column only exists once a
      node has been clicked, so the diagram uses the full width until then.
@@ -586,7 +478,6 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 19rem);
     width: min(1280px, 96vw);
   }
-  .diagram-row pre.mermaid { margin: 0; }
 
   .focus-panel {
     position: sticky;
@@ -626,11 +517,6 @@
 
   /* The node whose card is showing. Brightness alone is invisible on the pale
      supporting nodes, so the marker is the stroke. */
-  pre.mermaid g.node.is-selected rect {
-    stroke: var(--primary);
-    stroke-width: 2.5px;
-    stroke-dasharray: none;
-  }
 
   @media (max-width: 900px) {
     /* Not enough width for a side column — the panel drops beneath the diagram
@@ -675,6 +561,168 @@
   .callout:hover b { text-decoration: underline; }
   .callout svg { flex: none; color: #2A6DB0; transition: transform 0.15s ease; }
   .callout:hover svg { transform: translateX(3px); }
+
+  /* Stack map — the research ecosystem diagram. Hand-laid rather than generated:
+     CSS grid gives equal-width tiles and columns that actually line up, which
+     auto-layout could not. Tiles are <button>s so keyboard and focus come free. */
+  .stack-map {
+    --accent: #2A6DB0;
+    --accent-soft: #E4EFFA;
+    --accent-text: #123A5E;
+    --line: #B9B9B3;
+    --line-soft: #D3D3CE;
+    display: grid;
+    grid-template-columns: 1fr minmax(9rem, 0.5fr) 1fr;
+    align-items: stretch;
+    gap: 2.2rem;
+    margin: 1.5rem 0 2rem;
+  }
+  :root[data-theme="dark"] .stack-map {
+    --accent: #7FB3E0;
+    --accent-soft: rgba(127, 179, 224, 0.14);
+    --accent-text: #DCEAF8;
+    --line: rgba(255, 255, 255, 0.34);
+    --line-soft: rgba(255, 255, 255, 0.18);
+  }
+
+  .stack-col {
+    background: var(--entry);
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    padding: 0.9rem 1rem 1.1rem;
+  }
+
+  .stack-col-title,
+  .stack-group-title {
+    display: block;
+    margin: 0 0 0.85rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+
+  /* Vertical flow: every child after the first gets a connector drawn above it. */
+  .stack-flow { display: grid; gap: 1.65rem; }
+  .stack-flow > * { position: relative; }
+  .stack-flow > * + *::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -1.5rem;
+    width: 2px;
+    height: 1.05rem;
+    background: var(--line);
+  }
+  .stack-flow > * + *::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -0.5rem;
+    transform: translateX(-50%);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 7px solid var(--line);
+  }
+
+  .stack-tile {
+    display: block;
+    width: 100%;
+    padding: 0.6rem 0.7rem;
+    background: var(--accent-soft);
+    border: 2px solid var(--accent);
+    border-radius: 6px;
+    color: var(--accent-text);
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1.35;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .stack-tile:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09); }
+  .stack-tile.is-selected { box-shadow: 0 0 0 3px var(--accent-soft), 0 0 0 4px var(--accent); }
+
+  /* Supporting areas: same shape, neutral palette, dashed edge. */
+  .stack-tile.is-supporting {
+    background: var(--code-bg);
+    border: 1.5px dashed var(--line);
+    color: var(--secondary);
+    font-weight: 500;
+  }
+
+  .stack-group {
+    border: 1.5px dashed var(--line-soft);
+    border-radius: 6px;
+    padding: 0.75rem 0.8rem 0.85rem;
+    background: color-mix(in srgb, var(--accent) 5%, transparent);
+  }
+  .stack-group .stack-group-title { margin-bottom: 0.6rem; }
+
+  /* Paradigms as a true 2x2, and the fabric pair as a 1x2 — equal cells, always. */
+  .stack-quad,
+  .stack-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; }
+
+  /* Systems engineering spans the gap between the two columns — it is the thing
+     that joins them, so it is drawn as a bridge between rather than a bar below.
+     An arm reaches into each column with an arrowhead at both ends, because the
+     relationship runs in both directions. */
+  .stack-bridge {
+    position: relative;
+    display: grid;
+    align-items: center;
+  }
+  .stack-bridge .stack-tile {
+    display: grid;
+    gap: 0.3rem;
+    padding: 1rem 0.8rem;
+    font-size: 0.95rem;
+  }
+  .stack-tile-note {
+    font-size: 0.72rem;
+    font-weight: 500;
+    line-height: 1.35;
+    opacity: 0.75;
+  }
+
+  .bridge-arm {
+    position: absolute;
+    top: 50%;
+    width: 2.2rem;
+    height: 2px;
+    background: var(--line);
+  }
+  .bridge-arm--left { left: -2.2rem; }
+  .bridge-arm--right { right: -2.2rem; }
+
+  /* Arrowheads: one at each end of each arm. */
+  .bridge-arm::before,
+  .bridge-arm::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+  .bridge-arm::before { left: 0; border-right: 6px solid var(--line); }
+  .bridge-arm::after { right: 0; border-left: 6px solid var(--line); }
+
+  @media (max-width: 860px) {
+    .stack-map { grid-template-columns: 1fr; gap: 1.6rem; }
+    .bridge-arm { display: none; }
+    .stack-bridge::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -1.6rem;
+      width: 2px;
+      height: 1.6rem;
+      background: var(--line);
+    }
+  }
 
   /* Legend for the diagram. Colour encodes one thing only — whether an area is
      a primary interest or a supporting one — so the key has just two entries. */

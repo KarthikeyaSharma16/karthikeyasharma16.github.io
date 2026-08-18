@@ -5,6 +5,13 @@ showToc: true
 TocOpen: true
 ---
 
+<a class="callout" href="/pdf/resume.pdf">
+  <span>Download this CV as a <b>PDF</b></span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15" aria-hidden="true">
+    <path d="M12 4v12M7 12l5 5 5-5M5 20h14"></path>
+  </svg>
+</a>
+
 ## General Information
 
 |  |  |
