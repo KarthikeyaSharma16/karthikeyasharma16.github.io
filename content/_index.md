@@ -23,20 +23,19 @@ My **primary** interests are systems engineering, computer architecture (DPU, CP
 flowchart TD
     subgraph SW[" Workload &amp; software stack "]
     direction TB
-        S1["`**Inference serving**
-        vLLM · batching · PagedAttention`"]
+        S1["`**Inference serving**`"]
         S3["`**Compiler design**
-        IR · passes · codegen · auto-vectorization`"]
-        S2["`**High-performance kernels**
-        CUDA · AVX/SIMD · memory coalescing`"]
+        (Codegen, IR optimization)`"]
+        S2["`**High-performance kernels** 
+        (CUDA kernels, DSLs)`"]
         P5["`**Communication libraries**
-        Collectives (NCCL) · transfers (NIXL / UCX) · MPI`"]
+        (Collectives Communication (NCCL, MSCCL), transfers (NIXL), MPI)`"]
         S4["`**OS & drivers**
-        Scheduling · memory management · NUMA`"]
+        (Scheduling, memory management, NUMA)`"]
 
-        S1 --> S3
-        S3 --> S2
-        S2 --> P5
+        S1 --> S2
+        S2 --> S3
+        S3 --> P5
         P5 --> S4
     end
 
@@ -48,8 +47,7 @@ flowchart TD
             H2["`**GPU**`"]
             H3["`**FPGA**`"]
             H4["`**Custom ASIC**
-            Domain-specific
-            accelerators · dataflow`"]
+            (Domain-specific dataflow accelerators)`"]
 
             %% Invisible links: Mermaid ignores a subgraph's `direction` once the
             %% subgraph has edges crossing its boundary, so without these the four
@@ -59,20 +57,18 @@ flowchart TD
             H3 ~~~ H4
         end
 
-        P2["`**DPU — network fabric**
-        RDMA offload
-        SmartNIC datapath`"]
+        P2["`**Network fabric**
+        (DPU, SmartNIC)`"]
 
         P1["`**Interconnects**
-        PCIe · CXL · NVLink
-        UALink · RoCEv2`"]
+        (PCIe, CXL, NVLink)`"]
 
         ARCH --> P2
         ARCH --> P1
     end
 
     P3["`**Systems engineering**
-    Storage disaggregation · KV-cache offload · prefetch`"]
+    (Storage disaggregation, KV-cache offloading, KV Cache compression, NVMe-oF over RDMA, ROCEv2, NTI)`"]
 
     HW --> P3
     S4 --> P3
@@ -114,7 +110,7 @@ flowchart TD
   <ul>
     <li><b>PCIe</b> — Gen5/Gen6 links, DMA engines, endpoint and root-complex behavior</li>
     <li><b>CXL</b> — memory expansion and pooling, type-2/type-3 devices, coherence</li>
-    <li><b>NVLink / NVLink-C2C, UALink</b> — scale-up accelerator fabrics and topologies</li>
+    <li><b>NVLink, UALink</b> — scale-up accelerator fabrics and topologies</li>
     <li><b>RoCEv2, NVMe-over-RDMA</b> — scale-out I/O and storage disaggregation</li>
   </ul>
 </div>
